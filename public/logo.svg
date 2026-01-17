@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="#0F172A"/>
+  
+  <!-- S - Simplified Geometric Path -->
+  <path d="M220 150 H 130 C 110 150, 100 160, 100 180 V 200 C 100 220, 110 230, 130 230 H 190 C 210 230, 220 240, 220 260 V 320 C 220 340, 210 350, 190 350 H 100" stroke="#3B82F6" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- E - Matching Style -->
+  <path d="M300 150 H 420" stroke="white" stroke-width="50" stroke-linecap="round"/>
+  <path d="M300 250 H 390" stroke="white" stroke-width="50" stroke-linecap="round"/>
+  <path d="M300 350 H 420" stroke="white" stroke-width="50" stroke-linecap="round"/>
+  <path d="M300 150 V 350" stroke="white" stroke-width="50" stroke-linecap="round"/>
+  
+  <!-- Tech Dot -->
+  <circle cx="430" cy="430" r="25" fill="#3B82F6"/>
+</svg>
