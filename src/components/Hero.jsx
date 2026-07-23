@@ -1,115 +1,97 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Terminal, Cpu } from "lucide-react";
+import { ArrowRight, Sparkles, Sun } from "lucide-react";
 import { profile } from "../data/profile";
 
+const badges = [
+    { label: "7+ yrs experience", style: "top-2 -left-6 md:-left-10" },
+    { label: "AI-Integrated Systems", style: "top-1/2 -right-8 md:-right-14 -translate-y-1/2" },
+    { label: ".NET & Cloud Architect", style: "bottom-4 -left-4 md:-left-8" },
+];
+
 const Hero = () => {
-    const [text, setText] = useState("");
-    const fullText = "INITIALIZING SYSTEM ARCHITECTURE...";
-
-    useEffect(() => {
-        let i = 0;
-        const interval = setInterval(() => {
-            setText(fullText.substring(0, i));
-            i++;
-            if (i > fullText.length) clearInterval(interval);
-        }, 50);
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-
-            {/* Architectural Guidelines */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                <div className="absolute top-10 left-10 border-l mb-2 border-t border-blue-500/30 w-16 h-16"></div>
-                <div className="absolute text-[10px] text-blue-500/50 font-mono top-12 left-12">FIG 1.0</div>
-
-                <div className="absolute bottom-10 right-10 border-r border-b border-blue-500/30 w-16 h-16"></div>
-                <div className="absolute text-[10px] text-blue-500/50 font-mono bottom-12 right-12">SYS.READY</div>
-            </div>
-
-            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
                 {/* Main Content - Left */}
-                <div className="lg:col-span-8 text-left">
+                <div className="lg:col-span-7 text-left">
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="font-mono text-blue-500 text-sm mb-4 tracking-widest flex items-center gap-2"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/60 border border-white/80 backdrop-blur-sm shadow-sm font-sans text-sm font-medium text-ink-soft"
                     >
-                        <Terminal size={14} />
-                        {text}<span className="animate-pulse">_</span>
+                        <Sun size={16} className="text-tangerine" />
+                        Hey, I&apos;m Sandeep
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, ease: "circOut" }}
-                        className="text-6xl md:text-8xl font-black tracking-tighter mb-6 relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                        className="font-display text-5xl md:text-7xl font-bold tracking-tight mb-6 text-ink leading-[1.05]"
                     >
-                        <span className="text-blue-500">ETI</span>
-                        <br />
-                        <span className="text-white">SANDEEP</span>
-
-                        <motion.span
-                            initial={{ width: 0 }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                            className="absolute bottom-2 left-0 h-1 bg-blue-600"
-                        ></motion.span>
+                        I build{" "}
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-coral via-tangerine to-gold">
+                            AI-powered systems
+                        </span>{" "}
+                        that feel effortless.
                     </motion.h1>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 }}
-                        className="flex items-start gap-4 mb-8"
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                        className="text-lg md:text-xl text-ink-soft max-w-xl mb-10 leading-relaxed"
                     >
-                        <div className="w-1 bg-gradient-to-b from-blue-500 to-transparent h-24 hidden md:block"></div>
-                        <div>
-                            <h2 className="text-2xl md:text-3xl text-gray-300 font-light mb-2">
-                                {profile.headline.split("|")[0]}
-                            </h2>
-                            <p className="text-gray-400 max-w-xl">
-                                {profile.subHeadline}
-                            </p>
-                        </div>
-                    </motion.div>
+                        {profile.headline} — {profile.subHeadline}.
+                    </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 1 }}
-                        className="flex gap-6"
+                        transition={{ delay: 0.5 }}
+                        className="flex flex-wrap gap-4"
                     >
                         <a
                             href="#projects"
-                            className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-mono text-sm tracking-wider flex items-center gap-2 transition-all clip-path-slant"
-                            style={{ clipPath: "polygon(0 0, 100% 0, 95% 100%, 0% 100%)" }}
+                            className="px-7 py-4 bg-gradient-to-r from-coral to-tangerine hover:from-tangerine hover:to-coral text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
                         >
-                            ACCESS FILES <ArrowRight size={16} />
+                            See my work <ArrowRight size={18} />
                         </a>
                         <a
                             href="#contact"
-                            className="px-8 py-4 border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 font-mono text-sm tracking-wider transition-all"
+                            className="px-7 py-4 bg-white/60 border border-white/80 hover:bg-white text-ink font-semibold rounded-full transition-all backdrop-blur-sm"
                         >
-                            INITIATE COMMS
+                            Say hello
                         </a>
                     </motion.div>
                 </div>
 
-                {/* HUD Elements - Right */}
-                <div className="lg:col-span-4 hidden lg:block">
+                {/* Decorative orb + floating badges - Right */}
+                <div className="lg:col-span-5 hidden lg:flex justify-center">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.85 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 1.2 }}
-                        className="relative p-10 border border-blue-500/20 rounded-full w-80 h-80 flex items-center justify-center animate-spin-slow"
+                        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+                        className="relative w-80 h-80"
                     >
-                        <div className="absolute inset-0 border-t border-blue-500/50 rounded-full"></div>
-                        <div className="absolute inset-4 border-b border-purple-500/50 rounded-full reverse-spin"></div>
-                        <Cpu size={64} className="text-blue-500/50" />
+                        <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-coral via-tangerine to-gold opacity-90 shadow-2xl shadow-coral/40 animate-float" />
+                        <div className="absolute inset-8 rounded-[2rem] bg-white/30 backdrop-blur-md border border-white/50 flex items-center justify-center animate-float-delayed">
+                            <Sparkles size={56} className="text-white drop-shadow" />
+                        </div>
+
+                        {badges.map((badge, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.6 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.8 + i * 0.15, type: "spring" }}
+                                className={`absolute ${badge.style} px-4 py-2 bg-white/80 backdrop-blur-md border border-white shadow-lg rounded-2xl text-xs font-semibold text-ink whitespace-nowrap animate-float`}
+                            >
+                                {badge.label}
+                            </motion.div>
+                        ))}
                     </motion.div>
                 </div>
             </div>

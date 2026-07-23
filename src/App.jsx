@@ -19,13 +19,13 @@ function App() {
   });
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen selection:bg-blue-500/30 selection:text-blue-200 cursor-none overflow-x-hidden">
+    <div className="bg-cream text-ink min-h-screen selection:bg-coral/30 selection:text-ink cursor-none overflow-x-hidden">
       <CustomCursor />
       <GridBackground />
 
       {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-500 origin-left z-[100]"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-tangerine to-gold origin-left z-[100]"
         style={{ scaleX }}
       />
 
@@ -43,8 +43,8 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 bg-black/80 backdrop-blur text-center text-gray-500 text-xs font-mono border-t border-gray-900/50">
-        <p>SYSTEM STATUS: ONLINE | &copy; {new Date().getFullYear()} Sandeep Eti. ALL RIGHTS RESERVED.</p>
+      <footer className="py-8 bg-paper/80 backdrop-blur text-center text-ink-soft text-sm border-t border-ink/5">
+        <p>Made with warmth in every commit &middot; &copy; {new Date().getFullYear()} Sandeep Eti</p>
       </footer>
     </div>
   );
