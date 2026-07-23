@@ -36,13 +36,13 @@ const Dock = () => {
     }, []);
 
     return (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 rounded-2xl p-[1.5px] bg-gradient-to-r from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow shadow-[0_10px_35px_rgba(255,107,107,0.35)] dark:shadow-[0_10px_35px_rgba(75,59,140,0.5)]">
-            <div className="flex items-center gap-4 px-4 py-3 bg-white/90 dark:bg-night-paper/90 backdrop-blur-xl rounded-[15px]">
+        <div className="fixed bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1.5rem)] rounded-2xl p-[1.5px] bg-gradient-to-r from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow shadow-[0_10px_35px_rgba(255,107,107,0.35)] dark:shadow-[0_10px_35px_rgba(75,59,140,0.5)]">
+            <div className="flex items-center gap-1.5 sm:gap-4 px-2 sm:px-4 py-2 sm:py-3 bg-white/90 dark:bg-night-paper/90 backdrop-blur-xl rounded-[15px]">
                 {links.map((link, index) => (
                     <DockItem key={index} link={link} isActive={active === link.href} />
                 ))}
 
-                <div className="w-px h-6 bg-ink/10 dark:bg-white/10" />
+                <div className="w-px h-5 sm:h-6 bg-ink/10 dark:bg-white/10" />
 
                 <ThemeToggle />
             </div>
@@ -59,7 +59,7 @@ const DockItem = ({ link, isActive }) => {
                 whileHover={{ scale: 1.15, y: -6 }}
                 whileTap={{ scale: 0.92 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                className={`w-11 h-11 rounded-full flex items-center justify-center relative z-10 cursor-pointer transition-colors ${isActive
+                className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full flex items-center justify-center relative z-10 cursor-pointer transition-colors ${isActive
                         ? "bg-gradient-to-br from-coral to-tangerine dark:from-moon-indigo dark:to-moon-violet shadow-md shadow-coral/40 dark:shadow-moon-indigo/50"
                         : "bg-white dark:bg-night-paper shadow-sm ring-1 ring-black/5 dark:ring-white/10 hover:bg-gradient-to-br hover:from-coral hover:to-tangerine dark:hover:from-moon-indigo dark:hover:to-moon-violet hover:shadow-md hover:shadow-coral/30 dark:hover:shadow-moon-indigo/40"
                     }`}
@@ -113,7 +113,7 @@ const ThemeToggle = () => {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 aria-label={isSun ? "Switch to night theme" : "Switch to day theme"}
-                className={`w-11 h-11 rounded-full flex items-center justify-center text-white transition-colors ${isSun
+                className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-white transition-colors ${isSun
                         ? "bg-gradient-to-br from-tangerine to-gold shadow-md shadow-tangerine/40"
                         : "bg-gradient-to-br from-moon-indigo to-moon-violet shadow-md shadow-moon-indigo/50"
                     }`}
