@@ -23,10 +23,10 @@ const Skills = () => {
         <section id="skills" className="py-24 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-16">
-                    <h2 className="font-display text-4xl font-bold inline-flex items-center gap-3 mb-4 text-ink">
-                        <Cpu className="text-tangerine" /> Technical Arsenal
+                    <h2 className="font-display text-4xl font-bold inline-flex items-center gap-3 mb-4 text-ink dark:text-moon-ink">
+                        <Cpu className="text-tangerine dark:text-moon-glow" /> Technical Arsenal
                     </h2>
-                    <p className="text-ink-soft max-w-2xl mx-auto">
+                    <p className="text-ink-soft dark:text-moon-ink-soft max-w-2xl mx-auto">
                         A comprehensive set of tools and technologies I've mastered to build scalable, enterprise-grade solutions.
                     </p>
                 </div>
@@ -43,9 +43,9 @@ const Skills = () => {
                             key={index}
                             variants={item}
                             whileHover={{ scale: 1.08, translateY: -4 }}
-                            className="px-6 py-3 bg-white/70 border border-white/80 rounded-full hover:border-transparent hover:bg-gradient-to-r hover:from-coral hover:to-tangerine hover:shadow-lg hover:shadow-coral/30 transition-all cursor-default group"
+                            className="px-6 py-3 bg-white/70 dark:bg-night-paper/70 border border-white/80 dark:border-white/10 rounded-full hover:border-transparent hover:bg-gradient-to-r hover:from-coral hover:to-tangerine dark:hover:from-moon-indigo dark:hover:to-moon-violet hover:shadow-lg hover:shadow-coral/30 dark:hover:shadow-moon-indigo/40 transition-all cursor-default group"
                         >
-                            <span className="text-ink font-medium group-hover:text-white transition-colors">{skill}</span>
+                            <span className="text-ink dark:text-moon-ink font-medium group-hover:text-white transition-colors">{skill}</span>
                         </motion.div>
                     ))}
                 </motion.div>

@@ -13,8 +13,8 @@ const ExperienceCard = ({ exp, index }) => {
             <div className="hidden md:block w-[45%]"></div>
 
             {/* Timeline Node (Absolute Center) */}
-            <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-cream border-4 border-coral z-20 flex items-center justify-center shadow-[0_0_15px_rgba(255,107,107,0.4)]">
-                <div className="w-2 h-2 bg-gradient-to-br from-coral to-gold rounded-full"></div>
+            <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-cream dark:bg-night border-4 border-coral dark:border-moon-violet z-20 flex items-center justify-center shadow-[0_0_15px_rgba(255,107,107,0.4)] dark:shadow-[0_0_15px_rgba(139,127,217,0.5)]">
+                <div className="w-2 h-2 bg-gradient-to-br from-coral to-gold dark:from-moon-indigo dark:to-moon-glow rounded-full"></div>
             </div>
 
             {/* Card Content */}
@@ -25,13 +25,13 @@ const ExperienceCard = ({ exp, index }) => {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="w-full md:w-[45%]"
             >
-                <div className={`p-6 bg-white/70 backdrop-blur-md border border-white/80 rounded-2xl hover:border-coral/40 hover:bg-white/90 transition-all duration-300 shadow-lg shadow-tangerine/5 hover:shadow-xl hover:shadow-coral/20 group ${isLeft ? "text-right" : "text-left"}`}>
-                    <span className="text-coral font-semibold text-xs mb-2 block tracking-wider uppercase">{exp.period}</span>
-                    <h3 className="text-xl font-bold text-ink mb-1 font-display group-hover:text-coral transition-colors">{exp.role}</h3>
-                    <h4 className="text-sm font-semibold text-ink-soft mb-4 flex items-center gap-2 justify-end">
-                        {isLeft ? <>{exp.company} <span className="w-2 h-2 rounded-full bg-tangerine"></span></> : <><span className="w-2 h-2 rounded-full bg-tangerine"></span> {exp.company}</>}
+                <div className={`p-6 bg-white/70 dark:bg-night-paper/70 backdrop-blur-md border border-white/80 dark:border-white/10 rounded-2xl hover:border-coral/40 dark:hover:border-moon-violet/40 hover:bg-white/90 dark:hover:bg-night-paper/90 transition-all duration-300 shadow-lg shadow-tangerine/5 dark:shadow-moon-indigo/10 hover:shadow-xl hover:shadow-coral/20 dark:hover:shadow-moon-indigo/30 group ${isLeft ? "text-right" : "text-left"}`}>
+                    <span className="text-coral dark:text-moon-glow font-semibold text-xs mb-2 block tracking-wider uppercase">{exp.period}</span>
+                    <h3 className="text-xl font-bold text-ink dark:text-moon-ink mb-1 font-display group-hover:text-coral dark:group-hover:text-moon-glow transition-colors">{exp.role}</h3>
+                    <h4 className="text-sm font-semibold text-ink-soft dark:text-moon-ink-soft mb-4 flex items-center gap-2 justify-end">
+                        {isLeft ? <>{exp.company} <span className="w-2 h-2 rounded-full bg-tangerine dark:bg-moon-violet"></span></> : <><span className="w-2 h-2 rounded-full bg-tangerine dark:bg-moon-violet"></span> {exp.company}</>}
                     </h4>
-                    <p className="text-ink-soft text-sm leading-relaxed">{exp.description}</p>
+                    <p className="text-ink-soft dark:text-moon-ink-soft text-sm leading-relaxed">{exp.description}</p>
                 </div>
             </motion.div>
         </div>
@@ -51,19 +51,19 @@ const Experience = () => {
         <section id="experience" className="py-24 relative overflow-hidden" ref={ref}>
             <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="text-center mb-20">
-                    <h2 className="font-display text-4xl font-bold inline-flex items-center gap-3 text-ink">
-                        <Briefcase className="text-coral" /> Professional Journey
+                    <h2 className="font-display text-4xl font-bold inline-flex items-center gap-3 text-ink dark:text-moon-ink">
+                        <Briefcase className="text-coral dark:text-moon-glow" /> Professional Journey
                     </h2>
                 </div>
 
                 <div className="relative">
                     {/* Vertical Line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-ink/10 -translate-x-1/2"></div>
+                    <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-ink/10 dark:bg-white/10 -translate-x-1/2"></div>
 
                     {/* Animated Line Fill */}
                     <motion.div
                         style={{ scaleY, originY: 0 }}
-                        className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-coral via-tangerine to-gold -translate-x-1/2 z-10"
+                        className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow -translate-x-1/2 z-10"
                     ></motion.div>
 
                     <div className="py-10">

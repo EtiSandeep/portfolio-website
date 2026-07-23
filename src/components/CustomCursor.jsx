@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 
 const IDLE_DELAY = 1200;
 
+const GLOW_GRADIENT = {
+    sun: "radial-gradient(circle, #FF6B6B 0%, #F7A94E 60%, transparent 80%)",
+    moon: "radial-gradient(circle, #8B7FD9 0%, #4B3B8C 60%, transparent 80%)",
+};
+
 const CustomCursor = () => {
+    const { theme } = useTheme();
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [clicked, setClicked] = useState(false);
     const [linkHovered, setLinkHovered] = useState(false);
@@ -45,11 +52,12 @@ const CustomCursor = () => {
 
     return (
         <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
-            {/* Soft glow trail */}
+            {/* Soft glow trail — multiply reads on the cream day bg, screen reads on the night bg */}
             <motion.div
-                className="absolute rounded-full blur-md mix-blend-multiply"
+                className="absolute rounded-full blur-md"
                 style={{
-                    background: "radial-gradient(circle, #FF6B6B 0%, #F7A94E 60%, transparent 80%)",
+                    background: GLOW_GRADIENT[theme],
+                    mixBlendMode: theme === "moon" ? "screen" : "multiply",
                     translateX: "-50%",
                     translateY: "-50%",
                 }}
@@ -65,7 +73,7 @@ const CustomCursor = () => {
 
             {/* Precise center dot */}
             <motion.div
-                className="absolute w-2 h-2 rounded-full bg-ink"
+                className="absolute w-2 h-2 rounded-full bg-ink dark:bg-moon-ink"
                 style={{ translateX: "-50%", translateY: "-50%" }}
                 animate={{
                     x: position.x,

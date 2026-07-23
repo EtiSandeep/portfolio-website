@@ -19,13 +19,13 @@ function App() {
   });
 
   return (
-    <div className="bg-cream text-ink min-h-screen selection:bg-coral/30 selection:text-ink cursor-none overflow-x-hidden">
+    <div className="bg-cream text-ink dark:bg-night dark:text-moon-ink min-h-screen selection:bg-coral/30 selection:text-ink dark:selection:bg-moon-violet/40 dark:selection:text-moon-ink cursor-none overflow-x-hidden">
       <CustomCursor />
       <GridBackground />
 
       {/* Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-tangerine to-gold origin-left z-[100]"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow origin-left z-[100]"
         style={{ scaleX }}
       />
 
@@ -43,7 +43,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 bg-paper/80 backdrop-blur text-center text-ink-soft text-sm border-t border-ink/5">
+      <footer className="py-8 bg-paper/80 dark:bg-night-paper/80 backdrop-blur text-center text-ink-soft dark:text-moon-ink-soft text-sm border-t border-ink/5 dark:border-white/10">
         <p>Made with warmth in every commit &middot; &copy; {new Date().getFullYear()} Sandeep Eti</p>
       </footer>
     </div>

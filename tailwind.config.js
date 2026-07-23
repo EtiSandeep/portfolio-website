@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: 'class',
     content: [
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
@@ -16,6 +17,15 @@ export default {
                 gold: "#FFD97D",
                 rose: "#FF8FA3",
                 plum: "#6B3A4E",
+                // Moonlight (night theme) palette
+                night: "#140C24",
+                "night-paper": "#1F1638",
+                "moon-ink": "#F3ECFB",
+                "moon-ink-soft": "#B7A8D1",
+                "moon-indigo": "#4B3B8C",
+                "moon-violet": "#8B7FD9",
+                "moon-glow": "#F0D9A0",
+                "moon-plum": "#6B4E85",
             },
             fontFamily: {
                 display: ['"Outfit"', 'sans-serif'],
@@ -27,6 +37,7 @@ export default {
                 'blob-drift-slow': 'blob-drift 26s ease-in-out infinite',
                 'float': 'float 6s ease-in-out infinite',
                 'float-delayed': 'float 7s ease-in-out 1.5s infinite',
+                'twinkle': 'twinkle 3s ease-in-out infinite',
             },
             keyframes: {
                 'blob-drift': {
@@ -37,6 +48,10 @@ export default {
                 'float': {
                     '0%, 100%': { transform: 'translateY(0px)' },
                     '50%': { transform: 'translateY(-16px)' },
+                },
+                'twinkle': {
+                    '0%, 100%': { opacity: 0.2 },
+                    '50%': { opacity: 1 },
                 },
             },
         },
