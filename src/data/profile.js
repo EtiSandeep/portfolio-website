@@ -73,21 +73,25 @@ export const profile = {
     }
   ],
   projects: [
-    // Placeholder projects since none were listed on LinkedIn
     {
-      title: "AI-Driven Enterprise Platform",
-      description: "Architected a scalable platform leveraging .NET Core and LLMs to automate business workflows.",
-      technologies: ["AI", ".NET", "Azure"]
+      title: "HOM-i — AI Home Loan Assistant",
+      description: "Conversational AI platform guiding home buyers through property evaluation, lender matching, and credit checks, with ultra-fast multilingual voice AI built on real-time speech pipelines.",
+      technologies: ["Next.js", "Claude AI", "Voice AI"]
     },
     {
-      title: "Cloud Infrastructure Automation",
-      description: "Implemented comprehensive IaC using Terraform and Azure DevOps for seamless deployments.",
-      technologies: ["Terraform", "DevOps", "Azure"]
+      title: "Town Planning Blueprint Portal",
+      description: "Web portal for planning teams to upload CAD drawings and get AI-assisted plot analysis, with review dashboards and bulk reporting tools.",
+      technologies: ["React", "TypeScript", "Tailwind"]
     },
     {
-      title: "Smart Analytics Dashboard",
-      description: "Real-time analytics dashboard with predictive insights using Machine Learning.",
-      technologies: ["React", "Python", "ML"]
+      title: "Stackcamp — AI Knowledge Transfer",
+      description: "AI-powered platform that interviews developers to capture institutional knowledge, then turns it into structured Knowledge Cards that teammates can query interactively.",
+      technologies: ["Next.js", "FastAPI", "DSPy"]
+    },
+    {
+      title: "Self-Healing Agentic Scraper",
+      description: "A LangGraph-orchestrated multi-agent system that plans, writes, executes, and debugs its own Playwright scraping code on the fly — no hardcoded selectors, self-heals on failure.",
+      technologies: ["LangGraph", "Python", "Playwright"]
     }
   ],
   contact: {

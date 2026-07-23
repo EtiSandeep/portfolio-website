@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { profile } from "../data/profile";
-import { Folder, ExternalLink, Github } from "lucide-react";
+import { Folder, ExternalLink, Github, Lock } from "lucide-react";
 
 // 3D Tilt Card Component
 const ProjectCard = ({ project }) => {
@@ -63,12 +63,21 @@ const ProjectCard = ({ project }) => {
                         <Folder size={24} />
                     </div>
                     <div className="flex gap-3 relative z-50 pointer-events-auto">
-                        <a href="#" className="text-ink-soft dark:text-moon-ink-soft hover:text-ink dark:hover:text-moon-ink transition-colors p-1" title="View Code">
-                            <Github size={20} />
-                        </a>
-                        <a href="#" className="text-ink-soft dark:text-moon-ink-soft hover:text-ink dark:hover:text-moon-ink transition-colors p-1" title="Live Demo">
-                            <ExternalLink size={20} />
-                        </a>
+                        {project.github && (
+                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-ink-soft dark:text-moon-ink-soft hover:text-ink dark:hover:text-moon-ink transition-colors p-1" title="View Code">
+                                <Github size={20} />
+                            </a>
+                        )}
+                        {project.demo && (
+                            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-ink-soft dark:text-moon-ink-soft hover:text-ink dark:hover:text-moon-ink transition-colors p-1" title="Live Demo">
+                                <ExternalLink size={20} />
+                            </a>
+                        )}
+                        {!project.github && !project.demo && (
+                            <span className="flex items-center gap-1 text-xs text-ink-soft/70 dark:text-moon-ink-soft/70" title="Private project">
+                                <Lock size={14} />
+                            </span>
+                        )}
                     </div>
                 </div>
 
