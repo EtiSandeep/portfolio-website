@@ -1,55 +1,69 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { profile } from "../data/profile";
 import { Cpu } from "lucide-react";
+import { profile } from "../data/profile";
+import { useScene } from "../context/SceneContext";
 
+/**
+ * The constellation in the canvas is the real content here, so this section deliberately
+ * hugs the top of the viewport and leaves the middle empty. When the canvas cannot carry
+ * the labels (no WebGL, or a low-end device) the list drops back into the DOM.
+ */
 const Skills = () => {
-    const container = {
-        hidden: { opacity: 0 },
-        show: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const item = {
-        hidden: { opacity: 0, scale: 0.8 },
-        show: { opacity: 1, scale: 1 }
-    };
+    const { needsDomSkills } = useScene();
 
     return (
-        <section id="skills" className="py-24 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="font-display text-4xl font-bold inline-flex items-center gap-3 mb-4 text-ink dark:text-moon-ink">
-                        <Cpu className="text-tangerine dark:text-moon-glow" /> Technical Arsenal
-                    </h2>
-                    <p className="text-ink-soft dark:text-moon-ink-soft max-w-2xl mx-auto">
-                        A comprehensive set of tools and technologies I've mastered to build scalable, enterprise-grade solutions.
-                    </p>
-                </div>
+        <section
+            id="skills"
+            className="relative min-h-screen flex flex-col items-center justify-start px-5 sm:px-8 pt-32 pb-28 text-center"
+        >
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-15%" }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="copy-scrim max-w-2xl"
+            >
+                <span className="section-eyebrow mb-6">03 — Arsenal</span>
 
-                <motion.div
-                    variants={container}
+                <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 text-ink dark:text-moon-ink inline-flex items-center gap-3">
+                    <Cpu className="text-tangerine dark:text-moon-glow" size={28} />
+                    Technical Arsenal
+                </h2>
+
+                <p className="text-ink-soft dark:text-moon-ink-soft leading-relaxed">
+                    {profile.skills.length} technologies, wired into one lattice — the tools I reach
+                    for to build scalable, enterprise-grade systems.
+                </p>
+            </motion.div>
+
+            {needsDomSkills ? (
+                <motion.ul
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="flex flex-wrap justify-center gap-4"
+                    viewport={{ once: true, margin: "-10%" }}
+                    variants={{ hidden: {}, show: { transition: { staggerChildren: 0.05 } } }}
+                    className="mt-12 flex flex-wrap justify-center gap-3 max-w-3xl"
                 >
-                    {profile.skills.map((skill, index) => (
-                        <motion.div
-                            key={index}
-                            variants={item}
-                            whileHover={{ scale: 1.08, translateY: -4 }}
-                            className="px-6 py-3 bg-white/70 dark:bg-night-paper/70 border border-white/80 dark:border-white/10 rounded-full hover:border-transparent hover:bg-gradient-to-r hover:from-coral hover:to-tangerine dark:hover:from-moon-indigo dark:hover:to-moon-violet hover:shadow-lg hover:shadow-coral/30 dark:hover:shadow-moon-indigo/40 transition-all cursor-default group"
+                    {profile.skills.map((skill) => (
+                        <motion.li
+                            key={skill}
+                            variants={{
+                                hidden: { opacity: 0, scale: 0.85 },
+                                show: { opacity: 1, scale: 1 },
+                            }}
+                            className="glass-card rounded-full px-5 py-2.5 text-sm font-medium text-ink dark:text-moon-ink"
                         >
-                            <span className="text-ink dark:text-moon-ink font-medium group-hover:text-white transition-colors">{skill}</span>
-                        </motion.div>
+                            {skill}
+                        </motion.li>
                     ))}
-                </motion.div>
-            </div>
+                </motion.ul>
+            ) : (
+                <ul className="sr-only">
+                    {profile.skills.map((skill) => (
+                        <li key={skill}>{skill}</li>
+                    ))}
+                </ul>
+            )}
         </section>
     );
 };

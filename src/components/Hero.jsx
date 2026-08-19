@@ -1,13 +1,18 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Sun, Moon } from "lucide-react";
+import { ArrowRight, Moon, MousePointer2, Sun } from "lucide-react";
 import { profile } from "../data/profile";
 import { useTheme } from "../context/ThemeContext";
 
-const badges = [
-    { label: "7+ yrs experience", style: "top-2 -left-6 md:-left-10" },
-    { label: "AI-Integrated Systems", style: "top-1/2 -right-8 md:-right-14 -translate-y-1/2" },
-    { label: ".NET & Cloud Architect", style: "bottom-4 -left-4 md:-left-8" },
+const rise = (delay) => ({
+    initial: { opacity: 0, y: 26 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.85, delay, ease: [0.22, 1, 0.36, 1] },
+});
+
+const marks = [
+    { value: "7+", label: "years shipping" },
+    { value: "15+", label: "systems delivered" },
+    { value: "∞", label: "things left to build" },
 ];
 
 const Hero = () => {
@@ -15,94 +20,80 @@ const Hero = () => {
     const isSun = theme === "sun";
 
     return (
-        <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 pb-20">
-            <div className="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
-                {/* Main Content - Left */}
-                <div className="lg:col-span-7 text-left">
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/60 dark:bg-night-paper/60 border border-white/80 dark:border-white/10 backdrop-blur-sm shadow-sm font-sans text-sm font-medium text-ink-soft dark:text-moon-ink-soft"
-                    >
+        <section id="home" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-24 pb-28">
+            <div className="w-full max-w-6xl mx-auto">
+                <div className="copy-scrim w-full lg:mr-auto lg:max-w-[52%]">
+                    <motion.div {...rise(0)} className="section-eyebrow mb-7">
                         {isSun
-                            ? <Sun size={16} className="text-tangerine" />
-                            : <Moon size={16} className="text-moon-glow" />}
+                            ? <Sun size={13} className="text-tangerine" />
+                            : <Moon size={13} className="text-moon-glow" />}
                         Hey, I&apos;m Sandeep
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-                        className="font-display text-5xl md:text-7xl font-bold tracking-tight mb-6 text-ink dark:text-moon-ink leading-[1.05]"
+                        {...rise(0.08)}
+                        className="font-display text-[2.05rem] leading-[1.06] sm:text-5xl lg:text-7xl font-bold tracking-tight mb-5 sm:mb-7 text-ink dark:text-moon-ink"
                     >
                         I build{" "}
-                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow">
-                            AI-powered systems
-                        </span>{" "}
+                        <span className="gradient-text">AI-powered systems</span>{" "}
                         that feel effortless.
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        className="text-lg md:text-xl text-ink-soft dark:text-moon-ink-soft max-w-xl mb-10 leading-relaxed"
+                        {...rise(0.18)}
+                        className="text-[15px] sm:text-lg lg:text-xl text-ink/80 dark:text-moon-ink-soft max-w-xl mb-7 sm:mb-9 leading-relaxed"
                     >
                         {profile.headline} — {profile.subHeadline}.
                     </motion.p>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5 }}
-                        className="flex flex-wrap gap-4"
-                    >
+                    <motion.div {...rise(0.28)} className="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
                         <a
                             href="#projects"
-                            className="px-7 py-4 bg-gradient-to-r from-coral to-tangerine hover:from-tangerine hover:to-coral dark:from-moon-indigo dark:to-moon-violet dark:hover:from-moon-violet dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 dark:hover:shadow-moon-indigo/50 hover:-translate-y-0.5"
+                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-coral to-tangerine hover:from-tangerine hover:to-coral dark:from-moon-indigo dark:to-moon-violet dark:hover:from-moon-violet dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
                         >
                             See my work <ArrowRight size={18} />
                         </a>
                         <a
                             href="#contact"
-                            className="px-7 py-4 bg-white/60 dark:bg-night-paper/60 border border-white/80 dark:border-white/10 hover:bg-white dark:hover:bg-night-paper text-ink dark:text-moon-ink font-semibold rounded-full transition-all backdrop-blur-sm"
+                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-full text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
                         >
                             Say hello
                         </a>
                     </motion.div>
-                </div>
 
-                {/* Decorative orb + floating badges - Right */}
-                <div className="lg:col-span-5 hidden lg:flex justify-center">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-                        className="relative w-80 h-80"
-                    >
-                        <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-coral via-tangerine to-gold dark:from-moon-indigo dark:via-moon-violet dark:to-moon-glow opacity-90 shadow-2xl shadow-coral/40 dark:shadow-moon-indigo/50 animate-float" />
-                        <div className="absolute inset-8 rounded-[2rem] bg-white/30 dark:bg-white/10 backdrop-blur-md border border-white/50 dark:border-white/20 flex items-center justify-center animate-float-delayed">
-                            {isSun
-                                ? <Sparkles size={56} className="text-white drop-shadow" />
-                                : <Moon size={56} className="text-white drop-shadow" />}
-                        </div>
-
-                        {badges.map((badge, i) => (
-                            <motion.div
-                                key={i}
-                                initial={{ opacity: 0, scale: 0.6 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: 0.8 + i * 0.15, type: "spring" }}
-                                className={`absolute ${badge.style} px-4 py-2 bg-white/80 dark:bg-night-paper/80 backdrop-blur-md border border-white dark:border-white/10 shadow-lg rounded-2xl text-xs font-semibold text-ink dark:text-moon-ink whitespace-nowrap animate-float`}
-                            >
-                                {badge.label}
-                            </motion.div>
+                    <motion.dl {...rise(0.38)} className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-x-10 sm:gap-y-5">
+                        {marks.map((mark) => (
+                            <div key={mark.label}>
+                                <dt className="sr-only">{mark.label}</dt>
+                                <dd className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-moon-ink leading-none">
+                                    {mark.value}
+                                </dd>
+                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] text-ink/70 dark:text-moon-ink-soft">
+                                    {mark.label}
+                                </p>
+                            </div>
                         ))}
-                    </motion.div>
+                    </motion.dl>
                 </div>
             </div>
+
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                className="absolute bottom-10 right-5 sm:right-9 hidden sm:flex flex-col items-center gap-3 text-ink-soft dark:text-moon-ink-soft pointer-events-none"
+            >
+                <MousePointer2 size={14} className="rotate-180" />
+                <span className="text-[10px] uppercase tracking-[0.28em] [writing-mode:vertical-rl]">
+                    Scroll to travel
+                </span>
+                <motion.span
+                    className="w-px h-12 bg-gradient-to-b from-coral to-transparent dark:from-moon-violet"
+                    animate={{ scaleY: [0.3, 1, 0.3], opacity: [0.3, 1, 0.3] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+                    style={{ originY: 0 }}
+                />
+            </motion.div>
         </section>
     );
 };
