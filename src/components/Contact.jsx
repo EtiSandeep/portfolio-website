@@ -55,7 +55,7 @@ const Contact = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-3.5 p-3.5 rounded-2xl border border-white/60 dark:border-white/10 bg-white/40 dark:bg-white/5 hover:bg-white/70 dark:hover:bg-white/10 transition-colors group"
                             >
-                                <span className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-br from-coral to-tangerine dark:from-moon-indigo dark:to-moon-violet text-white flex items-center justify-center shadow-md shadow-coral/30 dark:shadow-moon-indigo/40 group-hover:scale-105 transition-transform">
+                                <span className="w-10 h-10 shrink-0 rounded-full bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep text-white flex items-center justify-center shadow-md shadow-coral/30 dark:shadow-moon-indigo/40 group-hover:scale-105 transition-transform">
                                     <Icon size={17} />
                                 </span>
                                 <span className="min-w-0">
@@ -109,7 +109,7 @@ const Contact = () => {
                         </div>
                         <button
                             type="submit"
-                            className="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-coral to-tangerine dark:from-moon-indigo dark:to-moon-violet hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2 shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40"
+                            className="w-full py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep hover:-translate-y-0.5 transition-transform flex items-center justify-center gap-2 shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40"
                         >
                             Send message <Send size={16} />
                         </button>

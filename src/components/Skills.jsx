@@ -26,7 +26,7 @@ const Skills = () => {
                 <span className="section-eyebrow mb-6">03 — Arsenal</span>
 
                 <h2 className="font-display text-3xl sm:text-4xl font-bold mb-4 text-ink dark:text-moon-ink inline-flex items-center gap-3">
-                    <Cpu className="text-tangerine dark:text-moon-glow" size={28} />
+                    <Cpu className="text-rust dark:text-moon-glow" size={28} />
                     Technical Arsenal
                 </h2>
 

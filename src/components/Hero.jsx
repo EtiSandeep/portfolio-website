@@ -25,7 +25,7 @@ const Hero = () => {
                 <div className="copy-scrim w-full lg:mr-auto lg:max-w-[52%]">
                     <motion.div {...rise(0)} className="section-eyebrow mb-7">
                         {isSun
-                            ? <Sun size={13} className="text-tangerine" />
+                            ? <Sun size={13} className="text-rust dark:text-moon-glow" />
                             : <Moon size={13} className="text-moon-glow" />}
                         Hey, I&apos;m Sandeep
                     </motion.div>
@@ -49,7 +49,7 @@ const Hero = () => {
                     <motion.div {...rise(0.28)} className="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
                         <a
                             href="#projects"
-                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-coral to-tangerine hover:from-tangerine hover:to-coral dark:from-moon-indigo dark:to-moon-violet dark:hover:from-moon-violet dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
+                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-ember to-rust hover:from-rust hover:to-ember dark:from-moon-indigo dark:to-moon-violet-deep dark:hover:from-moon-violet-deep dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
                         >
                             See my work <ArrowRight size={18} />
                         </a>
@@ -68,7 +68,7 @@ const Hero = () => {
                                 <dd className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-moon-ink leading-none">
                                     {mark.value}
                                 </dd>
-                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] text-ink/70 dark:text-moon-ink-soft">
+                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] text-ink/85 dark:text-moon-ink-soft">
                                     {mark.label}
                                 </p>
                             </div>

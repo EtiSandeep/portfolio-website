@@ -9,7 +9,7 @@ const Experience = () => (
             <span className="section-eyebrow mb-5">02 — Journey</span>
 
             <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6 text-ink dark:text-moon-ink flex items-center gap-3">
-                <Briefcase className="text-coral dark:text-moon-glow" size={28} />
+                <Briefcase className="text-ember dark:text-moon-glow" size={28} />
                 Professional Journey
             </h2>
 
@@ -37,7 +37,7 @@ const Experience = () => (
                             <h3 className="font-display text-base font-bold text-ink dark:text-moon-ink">
                                 {exp.role}
                             </h3>
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-coral dark:text-moon-glow">
+                            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ember dark:text-moon-glow">
                                 {exp.period}
                             </span>
                         </div>

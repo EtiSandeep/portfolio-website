@@ -39,7 +39,7 @@ const About = () => (
                             transition={{ duration: 0.5, delay: 0.15 + i * 0.08 }}
                             className="glass-card p-4 hover:-translate-y-1 transition-transform"
                         >
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-coral to-gold dark:from-moon-indigo dark:to-moon-violet text-white flex items-center justify-center mb-3 shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
+                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep text-white flex items-center justify-center mb-3 shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
                                 <Icon size={17} />
                             </div>
                             <p className="text-2xl font-bold text-ink dark:text-moon-ink font-display leading-none">
@@ -53,7 +53,7 @@ const About = () => (
 
             <a
                 href="#contact"
-                className="text-coral dark:text-moon-glow font-semibold hover:text-tangerine dark:hover:text-moon-violet transition-colors inline-flex items-center gap-2 group"
+                className="text-ember dark:text-moon-glow font-semibold hover:text-rust dark:hover:text-moon-violet transition-colors inline-flex items-center gap-2 group"
             >
                 Let&apos;s connect
                 <span className="group-hover:translate-x-1 transition-transform">→</span>

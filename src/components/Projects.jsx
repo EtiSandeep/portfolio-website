@@ -13,10 +13,10 @@ const ProjectRow = ({ project, index }) => (
     >
         <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex items-center gap-3">
-                <span className="font-display text-xs font-bold text-white w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-coral to-gold dark:from-moon-indigo dark:to-moon-violet shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
+                <span className="font-display text-xs font-bold text-white w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
                     {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-lg font-bold text-ink dark:text-moon-ink group-hover:text-coral dark:group-hover:text-moon-glow transition-colors">
+                <h3 className="font-display text-lg font-bold text-ink dark:text-moon-ink group-hover:text-ember dark:group-hover:text-moon-glow transition-colors">
                     {project.title}
                 </h3>
             </div>
@@ -28,7 +28,7 @@ const ProjectRow = ({ project, index }) => (
                         target="_blank"
                         rel="noopener noreferrer"
                         title="View code"
-                        className="text-ink-soft dark:text-moon-ink-soft hover:text-coral dark:hover:text-moon-glow transition-colors"
+                        className="text-ink-soft dark:text-moon-ink-soft hover:text-ember dark:hover:text-moon-glow transition-colors"
                     >
                         <Github size={18} />
                     </a>
@@ -39,7 +39,7 @@ const ProjectRow = ({ project, index }) => (
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Live demo"
-                        className="text-ink-soft dark:text-moon-ink-soft hover:text-coral dark:hover:text-moon-glow transition-colors"
+                        className="text-ink-soft dark:text-moon-ink-soft hover:text-ember dark:hover:text-moon-glow transition-colors"
                     >
                         <ExternalLink size={18} />
                     </a>

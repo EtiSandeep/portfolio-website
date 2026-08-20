@@ -11,8 +11,14 @@ export default {
                 cream: "#FFF8F0",
                 paper: "#FFF1E1",
                 ink: "#2B1B12",
-                "ink-soft": "#7A6255",
+                "ink-soft": "#574236",
                 coral: "#FF6B6B",
+                // Text-safe counterparts of coral/tangerine/rose. The bright originals are
+                // for glows, rails and the 3D world; anything carrying text, or sitting
+                // under white text, uses these so the day theme clears WCAG AA.
+                ember: "#A8322A",
+                rust: "#8F4712",
+                wine: "#733350",
                 tangerine: "#F7A94E",
                 gold: "#FFD97D",
                 rose: "#FF8FA3",
@@ -24,6 +30,7 @@ export default {
                 "moon-ink-soft": "#B7A8D1",
                 "moon-indigo": "#4B3B8C",
                 "moon-violet": "#8B7FD9",
+                "moon-violet-deep": "#6357B8",
                 "moon-glow": "#F0D9A0",
                 "moon-plum": "#6B4E85",
             },

@@ -60,8 +60,8 @@ const DockItem = ({ link, isActive }) => {
                 whileTap={{ scale: 0.92 }}
                 transition={{ type: "spring", stiffness: 400, damping: 15 }}
                 className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full flex items-center justify-center relative z-10 cursor-pointer transition-colors ${isActive
-                        ? "bg-gradient-to-br from-coral to-tangerine dark:from-moon-indigo dark:to-moon-violet shadow-md shadow-coral/40 dark:shadow-moon-indigo/50"
-                        : "bg-white dark:bg-night-paper shadow-sm ring-1 ring-black/5 dark:ring-white/10 hover:bg-gradient-to-br hover:from-coral hover:to-tangerine dark:hover:from-moon-indigo dark:hover:to-moon-violet hover:shadow-md hover:shadow-coral/30 dark:hover:shadow-moon-indigo/40"
+                        ? "bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep shadow-md shadow-coral/40 dark:shadow-moon-indigo/50"
+                        : "bg-white dark:bg-night-paper shadow-sm ring-1 ring-black/5 dark:ring-white/10 hover:bg-gradient-to-br hover:from-ember hover:to-rust dark:hover:from-moon-indigo dark:hover:to-moon-violet-deep hover:shadow-md hover:shadow-coral/30 dark:hover:shadow-moon-indigo/40"
                     }`}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
@@ -77,7 +77,7 @@ const DockItem = ({ link, isActive }) => {
             {isActive && (
                 <motion.div
                     layoutId="dock-active-dot"
-                    className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-coral to-tangerine dark:from-moon-indigo dark:to-moon-violet"
+                    className="absolute -bottom-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep"
                 />
             )}
 
@@ -114,7 +114,7 @@ const ThemeToggle = () => {
                 onMouseLeave={() => setHovered(false)}
                 aria-label={isSun ? "Switch to night theme" : "Switch to day theme"}
                 className={`w-8 h-8 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-white transition-colors ${isSun
-                        ? "bg-gradient-to-br from-tangerine to-gold shadow-md shadow-tangerine/40"
+                        ? "bg-gradient-to-br from-ember to-rust shadow-md shadow-ember/40"
                         : "bg-gradient-to-br from-moon-indigo to-moon-violet shadow-md shadow-moon-indigo/50"
                     }`}
             >
