@@ -29,7 +29,7 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-15%" }}
                 transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-                className="glass-panel w-full max-w-3xl mx-auto p-8 sm:p-11"
+                className="glass-panel w-full max-w-2xl mx-auto p-7 sm:p-9"
             >
                 <div className="text-center mb-9">
                     <span className="section-eyebrow mb-5">05 — Contact</span>

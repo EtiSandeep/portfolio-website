@@ -25,13 +25,14 @@ export const pointer = {
  * Work starts a little before arrival so a set piece is mid-construction as it comes into
  * view, and is complete by the time the visitor is looking straight at it.
  */
-export function stationBuild(index, lead = 0.85) {
+export function stationBuild(index, lead = 1.15) {
     const distance = scroll.station - (index - lead);
-    return Math.min(Math.max(distance / lead, 0), 1);
+    const t = Math.min(Math.max(distance / lead, 0), 1);
+    return t * t * (3 - 2 * t);
 }
 
 /** Linework inks in ahead of the solid, so the drawing always leads the build. */
-export function stationDraw(index, lead = 1.5) {
+export function stationDraw(index, lead = 1.9) {
     const distance = scroll.station - (index - lead);
     return Math.min(Math.max(distance / (lead * 0.55), 0), 1);
 }

@@ -5,7 +5,7 @@ import Built from "../Built";
 import { mergeParts } from "../merge";
 import { anchorOf } from "../stations";
 
-const RADIUS = 4.7;
+const RADIUS = 5.6;
 const TICKS = 36;
 
 /**
@@ -23,14 +23,10 @@ export default function Seal({ motion = 1 }) {
         const scale = new Vector3(1, 1, 1);
         const flat = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), Math.PI / 2);
 
-        // Outer and inner rings.
-        matrix.compose(new Vector3(0, 0, 0), flat, scale);
-        parts.push({ geometry: new TorusGeometry(RADIUS, 0.075, 12, 96), matrix: matrix.clone() });
-        matrix.identity();
-
-        matrix.compose(new Vector3(0, 0, 0), flat, scale);
-        parts.push({ geometry: new TorusGeometry(RADIUS - 0.45, 0.04, 10, 84), matrix: matrix.clone() });
-        matrix.identity();
+        // Outer and inner rings. A torus already lies in the XY plane — the plane facing
+        // the viewer — so these are left unrotated; only the boss below needs turning.
+        parts.push({ geometry: new TorusGeometry(RADIUS, 0.1, 12, 96), matrix: null });
+        parts.push({ geometry: new TorusGeometry(RADIUS - 0.5, 0.05, 10, 84), matrix: null });
 
         // Graduation ticks around the rim, like a protractor.
         for (let i = 0; i < TICKS; i++) {
@@ -73,7 +69,7 @@ export default function Seal({ motion = 1 }) {
         if (!group.current) return;
         const t = clock.elapsedTime * motion;
         group.current.rotation.z = t * 0.05;
-        group.current.rotation.x = Math.sin(t * 0.18) * 0.12;
+        group.current.rotation.x = Math.sin(t * 0.18) * 0.05;
     });
 
     return <Built ref={group} geometry={geometry} station={5} jitter={0.08} noiseScale={0.9} metal={0.85} position={anchor} />;

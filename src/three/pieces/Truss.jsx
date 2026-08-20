@@ -10,25 +10,31 @@ import { profile } from "../../data/profile";
 
 const COLS = 5;
 const ROWS = 3;
-const SPACING = 1.62;
+const SPACING = 2.35;
 const DEPTH = 0.72;
 const UP = new Vector3(0, 1, 0);
 
-/** A gently vaulted grid shell: nodes on two chords, braced diagonally. */
+/**
+ * A braced screen standing upright, bowed gently toward the viewer.
+ *
+ * An earlier version lay flat like a floor, which put all fifteen nodes at nearly the same
+ * height: the labels collapsed into one band, and the construction front swept the whole
+ * thing at once. Standing it up gives the labels a real grid to sit on and lets the build
+ * climb it row by row.
+ */
 function layout() {
-    const top = [];
-    const bottom = [];
+    const front = [];
+    const back = [];
     for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
             const x = (c - (COLS - 1) / 2) * SPACING;
-            const z = (r - (ROWS - 1) / 2) * SPACING;
-            // Vault the shell so it reads as a structure rather than a flat grid.
-            const sag = Math.cos((x / (COLS * SPACING)) * Math.PI) * 0.55;
-            top.push(new Vector3(x, sag, z));
-            bottom.push(new Vector3(x, sag - DEPTH, z));
+            const y = (r - (ROWS - 1) / 2) * SPACING * 0.92;
+            const bow = Math.cos((x / (COLS * SPACING)) * Math.PI) * 0.5;
+            front.push(new Vector3(x, y, bow));
+            back.push(new Vector3(x, y, bow - DEPTH));
         }
     }
-    return { top, bottom };
+    return { top: front, bottom: back };
 }
 
 export default function Truss({ motion = 1 }) {
@@ -90,7 +96,7 @@ export default function Truss({ motion = 1 }) {
     // 15 portalled labels are not free — only mount them while the truss is on screen.
     useFrame(({ clock }) => {
         if (group.current) {
-            group.current.rotation.y = 0.28 + Math.sin(clock.elapsedTime * 0.14 * motion) * 0.32;
+            group.current.rotation.y = Math.sin(clock.elapsedTime * 0.12 * motion) * 0.34;
         }
         const isNear = Math.abs(scroll.station - 3) < 0.85;
         if (isNear !== near) setNear(isNear);
@@ -102,7 +108,13 @@ export default function Truss({ motion = 1 }) {
                 profile.skills.slice(0, nodes.top.length).map((skill, i) => (
                     <Html
                         key={skill}
-                        position={nodes.top[i]}
+                        // Lifted clear of the node, alternating by row so adjacent labels
+                        // do not stack up on each other in projection.
+                        position={[
+                            nodes.top[i].x,
+                            nodes.top[i].y + 0.3 + (i % 2) * 0.36,
+                            nodes.top[i].z + 0.3,
+                        ]}
                         center
                         distanceFactor={11}
                         zIndexRange={[20, 0]}

@@ -93,7 +93,9 @@ void main() {
   float fres = pow(1.0 - max(dot(n, v), 0.0), 2.2);
 
   vec3 lightDir = normalize(vec3(0.45, 0.85, 0.6));
-  float diffuse = 0.42 + 0.58 * max(dot(n, lightDir), 0.0);
+  float key = max(dot(n, lightDir), 0.0);
+  float fill = max(dot(n, -lightDir), 0.0);
+  float diffuse = 0.55 + 0.45 * key + 0.18 * fill;
   float spec = pow(max(dot(reflect(-v, n), lightDir), 0.0), 42.0);
 
   vec3 col = mix(uDeep, uWarm, uMetal) * diffuse;
