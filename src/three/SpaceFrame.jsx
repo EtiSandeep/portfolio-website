@@ -159,7 +159,7 @@ export default function SpaceFrame({ motion = 1, tier = "high" }) {
                     Math.sin(i * 78.233) * 2.4,
                     Math.sin(i * 37.719) * 2.4,
                 ),
-                throwDistance: 1.5 + Math.abs(Math.sin(i * 4.1)) * 2.2,
+                throwDistance: 1.0 + Math.abs(Math.sin(i * 4.1)) * 1.5,
             };
         });
 
@@ -167,7 +167,7 @@ export default function SpaceFrame({ motion = 1, tier = "high" }) {
             rest: p.clone(),
             outward: p.clone().normalize(),
             spin: new Vector3(Math.sin(i * 5.31) * 3, Math.sin(i * 9.17) * 3, Math.sin(i * 2.71) * 3),
-            throwDistance: 1.2 + Math.abs(Math.sin(i * 7.7)) * 1.8,
+            throwDistance: 0.8 + Math.abs(Math.sin(i * 7.7)) * 1.2,
         }));
 
         return { beams, joints };
@@ -256,9 +256,18 @@ export default function SpaceFrame({ motion = 1, tier = "high" }) {
             syncPaletteUniforms(material.uniforms);
         }
 
-        const place = (ref, list, radiusScale) => {
-            if (!ref.current) return;
-            list.forEach((piece, i) => {
+        // Both instanced meshes are laid out with the same rule, written inline rather than
+        // through a helper: handing the memoised piece list to a function makes it look, to
+        // static analysis, like caller state might be mutated. Nothing here writes to it.
+        for (const [mesh, list] of [
+            [beamsRef.current, pieces.beams],
+            [jointsRef.current, pieces.joints],
+        ]) {
+            if (!mesh) continue;
+
+            for (let i = 0; i < list.length; i++) {
+                const piece = list[i];
+
                 // Pieces low in the structure come home first.
                 const heightRank = (piece.rest.y - bounds.min) / bounds.span;
                 const delay = heightRank * REPAIR * 0.65;
@@ -278,20 +287,16 @@ export default function SpaceFrame({ motion = 1, tier = "high" }) {
                 dummy.rotateY(piece.spin.y * damage);
                 dummy.rotateZ(piece.spin.z * damage);
 
-                if (piece.length !== undefined) {
-                    dummy.scale.set(1, piece.length, 1);
-                } else {
-                    dummy.scale.setScalar(radiusScale);
-                }
+                // Beams stretch along their own length; joints keep their geometry's size.
+                if (piece.length !== undefined) dummy.scale.set(1, piece.length, 1);
+                else dummy.scale.setScalar(1);
 
                 dummy.updateMatrix();
-                ref.current.setMatrixAt(i, dummy.matrix);
-            });
-            ref.current.instanceMatrix.needsUpdate = true;
-        };
+                mesh.setMatrixAt(i, dummy.matrix);
+            }
 
-        place(beamsRef, pieces.beams, 1);
-        place(jointsRef, pieces.joints, 1);
+            mesh.instanceMatrix.needsUpdate = true;
+        }
 
         if (group.current) {
             group.current.rotation.y = time * 0.075 * motion;

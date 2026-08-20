@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Moon, MousePointer2, Sun } from "lucide-react";
+import { ArrowRight, Moon, MousePointer2, Sun, Zap } from "lucide-react";
 import { profile } from "../data/profile";
+import { strikeHero } from "../three/heroBus";
 import { useTheme } from "../context/ThemeContext";
 
 const rise = (delay) => ({
@@ -49,16 +50,32 @@ const Hero = () => {
                     <motion.div {...rise(0.28)} className="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
                         <a
                             href="#projects"
-                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-ember to-rust hover:from-rust hover:to-ember dark:from-moon-indigo dark:to-moon-violet-deep dark:hover:from-moon-violet-deep dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
+                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-ember hover:bg-wine dark:bg-moon-indigo dark:hover:bg-moon-violet-deep text-white font-semibold rounded-sm flex items-center gap-2 transition-all shadow-lg shadow-ink/20 hover:-translate-y-0.5"
                         >
                             See my work <ArrowRight size={18} />
                         </a>
                         <a
                             href="#contact"
-                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-full text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
+                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-sm text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
                         >
                             Say hello
                         </a>
+                    </motion.div>
+
+                    {/* The structure can be struck by clicking it, but that is invisible to
+                        anyone not using a mouse — so the same action gets a real control. */}
+                    <motion.div {...rise(0.34)} className="mb-8 sm:mb-10">
+                        <button
+                            type="button"
+                            onClick={strikeHero}
+                            className="group inline-flex items-center gap-2 border border-ink/30 dark:border-moon-violet/40 px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink-soft dark:text-moon-ink-soft transition-colors hover:text-ink dark:hover:text-moon-ink"
+                        >
+                            <Zap size={12} className="text-ember dark:text-moon-glow" />
+                            Stress-test the structure
+                        </button>
+                        <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-soft dark:text-moon-ink-soft">
+                            It breaks. Then it puts itself back.
+                        </p>
                     </motion.div>
 
                     <motion.dl {...rise(0.38)} className="grid grid-cols-3 gap-3 sm:flex sm:flex-wrap sm:gap-x-10 sm:gap-y-5">

@@ -8,31 +8,35 @@ export default {
     theme: {
         extend: {
             colors: {
-                cream: "#FFF8F0",
-                paper: "#FFF1E1",
-                ink: "#2B1B12",
-                "ink-soft": "#574236",
-                coral: "#FF6B6B",
-                // Text-safe counterparts of coral/tangerine/rose. The bright originals are
-                // for glows, rails and the 3D world; anything carrying text, or sitting
-                // under white text, uses these so the day theme clears WCAG AA.
-                ember: "#A8322A",
-                rust: "#8F4712",
-                wine: "#733350",
-                tangerine: "#F7A94E",
-                gold: "#FFD97D",
-                rose: "#FF8FA3",
-                plum: "#6B3A4E",
-                // Moonlight (night theme) palette
-                night: "#140C24",
-                "night-paper": "#1F1638",
-                "moon-ink": "#F3ECFB",
-                "moon-ink-soft": "#B7A8D1",
-                "moon-indigo": "#4B3B8C",
-                "moon-violet": "#8B7FD9",
-                "moon-violet-deep": "#6357B8",
-                "moon-glow": "#F0D9A0",
-                "moon-plum": "#6B4E85",
+                // Drafting paper — the day sheet, under studio light.
+                cream: "#EFEADC",
+                paper: "#F7F3E9",
+                ink: "#14243A",
+                "ink-soft": "#46586F",
+
+                // Decorative linework and brass. Bright enough to draw with, too bright to
+                // set type in — see ember/rust/wine below for the text-safe versions.
+                coral: "#2E6FBF",
+                tangerine: "#C08A2E",
+                gold: "#E3C77A",
+                rose: "#7FB2E8",
+                plum: "#243B57",
+
+                // Text-safe: anything carrying type, or sitting under white type.
+                ember: "#1B4E8F",
+                rust: "#7A4E12",
+                wine: "#243B57",
+
+                // Cyanotype — the night sheet.
+                night: "#08182E",
+                "night-paper": "#0C2340",
+                "moon-ink": "#DCEEFB",
+                "moon-ink-soft": "#93B6D4",
+                "moon-indigo": "#17558A",
+                "moon-violet": "#6FC7F5",
+                "moon-violet-deep": "#17558A",
+                "moon-glow": "#E0B45E",
+                "moon-plum": "#123A5E",
             },
             fontFamily: {
                 display: ['"Outfit"', 'sans-serif'],

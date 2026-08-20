@@ -36,7 +36,7 @@ export default function Truss({ motion = 1 }) {
     const group = useRef();
     const [near, setNear] = useState(false);
 
-    const nodes = useMemo(layout, []);
+    const nodes = useMemo(() => layout(), []);
 
     const geometry = useMemo(() => {
         const parts = [];

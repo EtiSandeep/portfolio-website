@@ -23,7 +23,7 @@ export default function SceneCanvas() {
     if (!enabled) return <Backdrop />;
 
     return (
-        <div aria-hidden="true" className="fixed inset-0 z-0 pointer-events-none">
+        <div aria-hidden="true" className="fixed inset-0 z-0">
             <Suspense fallback={<Backdrop />}>
                 <WorldCanvas theme={theme} quality={quality} />
             </Suspense>

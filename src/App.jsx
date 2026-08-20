@@ -19,7 +19,7 @@ function App() {
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
     return (
-        <div className="relative min-h-screen text-ink dark:text-moon-ink cursor-none overflow-x-hidden selection:bg-coral/30 selection:text-ink dark:selection:bg-moon-violet/40 dark:selection:text-moon-ink">
+        <div className="relative min-h-screen text-ink dark:text-moon-ink overflow-x-hidden selection:bg-coral/30 selection:text-ink dark:selection:bg-moon-violet/40 dark:selection:text-moon-ink">
             <Intro />
             <CustomCursor />
 
