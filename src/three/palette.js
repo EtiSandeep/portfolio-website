@@ -5,41 +5,43 @@ import { Color } from "three";
 // material rebuilds, no React renders, and every set piece changes together.
 
 export const THEMES = {
-    // Golden hour, not paper white: additive glow needs something to glow against, and a
-    // warm mid-tone sky keeps the cream glass panels reading as lit glass.
+    // Drafting paper: a warm sheet under studio light. Linework is indigo, and anything
+    // that has been *built* comes through in brass and graphite.
     sun: {
-        hot: "#E14D4D",
-        warm: "#E5822B",
-        bright: "#FFC24D",
-        accent: "#E8697F",
-        deep: "#71304A",
-        fog: "#EFC6A3",
-        background: "#FAEBD7",
-        horizon: "#E3A57E",
-        dust: "#C0603F",
-        line: "#8F4536",
-        rim: "#FFF6EA",
-        lightIntensity: 2.4,
-        ambientIntensity: 1.0,
-        bloom: 0.34,
-        threshold: 0.72,
+        hot: "#8C3A2E",        // revision red
+        warm: "#A8712B",       // brass
+        bright: "#BE8729",     // brass highlight
+        accent: "#1F5FA8",     // draft blue
+        deep: "#2A2A28",       // graphite
+        fog: "#E4DDCB",
+        background: "#EFEADC",
+        horizon: "#DBD2BC",
+        dust: "#8E9AA2",
+        line: "#24466E",       // the linework itself
+        rim: "#FFFFFF",
+        lightIntensity: 2.2,
+        ambientIntensity: 1.1,
+        bloom: 0.26,
+        threshold: 0.78,
     },
+    // Cyanotype: the classic blueprint. Deep Prussian ground, cyan linework, and warm
+    // brass where the drawing has resolved into matter.
     moon: {
-        hot: "#4B3B8C",     // moon-indigo
-        warm: "#8B7FD9",    // moon-violet
-        bright: "#F0D9A0",  // moon-glow
-        accent: "#B7A8D1",
-        deep: "#6B4E85",    // moon-plum
-        fog: "#1E1338",
-        background: "#140C24",
-        horizon: "#2A1B4A",
-        dust: "#C9B8F0",
-        line: "#A091E4",
-        rim: "#F3ECFB",
+        hot: "#E06A55",
+        warm: "#C89B4E",
+        bright: "#F0C978",
+        accent: "#5AB6F0",
+        deep: "#061224",
+        fog: "#0B1F38",
+        background: "#08182E",
+        horizon: "#103055",
+        dust: "#6E9BC4",
+        line: "#8FD8FF",
+        rim: "#EAF6FF",
         lightIntensity: 2.0,
-        ambientIntensity: 0.45,
+        ambientIntensity: 0.5,
         bloom: 0.85,
-        threshold: 0.42,
+        threshold: 0.45,
     },
 };
 

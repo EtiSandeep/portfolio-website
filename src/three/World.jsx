@@ -1,34 +1,38 @@
 import Atmosphere from "./Atmosphere";
-import CareerHelix from "./CareerHelix";
-import CrystalBloom from "./CrystalBloom";
 import Effects from "./Effects";
-import Monoliths from "./Monoliths";
-import Nucleus from "./Nucleus";
-import Portal from "./Portal";
+import GridField from "./GridField";
 import Rig from "./Rig";
-import SkillConstellation from "./SkillConstellation";
 import SkyDome from "./SkyDome";
-import StarDust from "./StarDust";
+import SpaceFrame from "./SpaceFrame";
+import Plots from "./pieces/Plots";
+import Seal from "./pieces/Seal";
+import Sheets from "./pieces/Sheets";
+import Truss from "./pieces/Truss";
+import Tower from "./pieces/Tower";
 
-/** Everything inside the canvas: one continuous space with a set piece at each stop. */
+/**
+ * Blueprint → Built.
+ *
+ * Everything here exists first as linework and then as matter. As the camera nears a
+ * station, that set piece inks itself in and a construction front rises through it, turning
+ * the drawing into a lit, solid object. The hero can be struck, and puts itself back.
+ */
 export default function World({ theme, quality }) {
-    const { tier, motion, particles, effects, dpr } = quality;
-    const pixelRatio = Array.isArray(dpr) ? dpr[1] : 1.5;
+    const { tier, motion, effects } = quality;
 
     return (
         <>
             <Atmosphere theme={theme} motion={motion} />
             <Rig motion={motion} />
             <SkyDome motion={motion} />
+            <GridField />
 
-            <StarDust count={particles} motion={motion} pixelRatio={pixelRatio} />
-
-            <Nucleus tier={tier} motion={motion} />
-            <CrystalBloom motion={motion} />
-            <CareerHelix motion={motion} tier={tier} />
-            <SkillConstellation motion={motion} showLabels={tier !== "low"} />
-            <Monoliths motion={motion} />
-            <Portal motion={motion} pixelRatio={pixelRatio} tier={tier} />
+            <SpaceFrame motion={motion} tier={tier} />
+            <Sheets motion={motion} />
+            <Tower motion={motion} />
+            <Truss motion={motion} />
+            <Plots motion={motion} />
+            <Seal motion={motion} />
 
             {effects && <Effects theme={theme} tier={tier} motion={motion} />}
         </>

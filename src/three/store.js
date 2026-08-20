@@ -20,6 +20,22 @@ export const pointer = {
     active: false,
 };
 
+/**
+ * How far along the drawing-to-built transition a station is, given where the camera is.
+ * Work starts a little before arrival so a set piece is mid-construction as it comes into
+ * view, and is complete by the time the visitor is looking straight at it.
+ */
+export function stationBuild(index, lead = 0.85) {
+    const distance = scroll.station - (index - lead);
+    return Math.min(Math.max(distance / lead, 0), 1);
+}
+
+/** Linework inks in ahead of the solid, so the drawing always leads the build. */
+export function stationDraw(index, lead = 1.5) {
+    const distance = scroll.station - (index - lead);
+    return Math.min(Math.max(distance / (lead * 0.55), 0), 1);
+}
+
 let centers = [];
 let lastStation = 0;
 let lastTime = 0;
