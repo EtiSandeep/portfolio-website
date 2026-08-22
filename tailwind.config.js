@@ -27,7 +27,7 @@ export default {
                 night: "#140C24",
                 "night-paper": "#1F1638",
                 "moon-ink": "#F3ECFB",
-                "moon-ink-soft": "#B7A8D1",
+                "moon-ink-soft": "#C6BAE3",
                 "moon-indigo": "#4B3B8C",
                 "moon-violet": "#8B7FD9",
                 "moon-violet-deep": "#6357B8",
@@ -35,8 +35,8 @@ export default {
                 "moon-plum": "#6B4E85",
             },
             fontFamily: {
-                display: ['"Outfit"', 'sans-serif'],
-                sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                display: ['"Outfit"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
             },
             animation: {
                 'spin-slow': 'spin 14s linear infinite',

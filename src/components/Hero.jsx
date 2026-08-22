@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Moon, MousePointer2, Sun } from "lucide-react";
-import { profile } from "../data/profile";
 import { useTheme } from "../context/ThemeContext";
 
 const rise = (delay) => ({
@@ -35,7 +34,7 @@ const Hero = () => {
                         className="font-display text-[2.05rem] leading-[1.06] sm:text-5xl lg:text-7xl font-bold tracking-tight mb-5 sm:mb-7 text-ink dark:text-moon-ink"
                     >
                         I build{" "}
-                        <span className="gradient-text">AI-powered systems</span>{" "}
+                        <span className="gradient-text">AI‑powered systems</span>{" "}
                         that feel effortless.
                     </motion.h1>
 
@@ -43,19 +42,20 @@ const Hero = () => {
                         {...rise(0.18)}
                         className="text-[15px] sm:text-lg lg:text-xl text-ink/80 dark:text-moon-ink-soft max-w-xl mb-7 sm:mb-9 leading-relaxed"
                     >
-                        {profile.headline} — {profile.subHeadline}.
+                        Principal Engineer and Solution Architect, building enterprise .NET
+                        platforms, cloud infrastructure and the AI systems layered on top.
                     </motion.p>
 
-                    <motion.div {...rise(0.28)} className="flex flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
+                    <motion.div {...rise(0.28)} className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
                         <a
                             href="#projects"
-                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-ember to-rust hover:from-rust hover:to-ember dark:from-moon-indigo dark:to-moon-violet-deep dark:hover:from-moon-violet-deep dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
+                            className="w-full sm:w-auto justify-center px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-ember to-rust hover:from-rust hover:to-ember dark:from-moon-indigo dark:to-moon-violet-deep dark:hover:from-moon-violet-deep dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
                         >
                             See my work <ArrowRight size={18} />
                         </a>
                         <a
                             href="#contact"
-                            className="px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-full text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
+                            className="w-full sm:w-auto text-center px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-full text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
                         >
                             Say hello
                         </a>
@@ -68,7 +68,7 @@ const Hero = () => {
                                 <dd className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-moon-ink leading-none">
                                     {mark.value}
                                 </dd>
-                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.12em] sm:tracking-[0.15em] text-ink/85 dark:text-moon-ink-soft">
+                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.06em] sm:tracking-[0.15em] text-ink/85 dark:text-moon-ink-soft">
                                     {mark.label}
                                 </p>
                             </div>

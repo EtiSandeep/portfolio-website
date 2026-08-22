@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { profile } from "../data/profile";
 
-const MIN_DURATION = 1200;
+// The curtain is decorative — the page behind it is already interactive — so it should
+// clear as soon as it plausibly can rather than holding the visitor at the door.
+const MIN_DURATION = 650;
 
 /**
  * Covers the first moment while fonts settle and the first shaders compile, then lifts
@@ -26,7 +28,7 @@ export default function Intro() {
         fonts.then(finish).catch(finish);
 
         // Never trap the visitor behind the curtain if something stalls.
-        const bail = setTimeout(finish, 3200);
+        const bail = setTimeout(finish, 1400);
         return () => {
             cancelled = true;
             clearTimeout(bail);

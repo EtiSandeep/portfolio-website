@@ -12,8 +12,8 @@ const ProjectRow = ({ project, index }) => (
         className="glass-card p-5 hover:-translate-y-1 transition-transform group"
     >
         <div className="flex items-start justify-between gap-4 mb-3">
-            <div className="flex items-center gap-3">
-                <span className="font-display text-xs font-bold text-white w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
+            <div className="flex items-start gap-3">
+                <span className="mt-0.5 shrink-0 font-display text-xs font-bold text-white w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
                     {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="font-display text-lg font-bold text-ink dark:text-moon-ink group-hover:text-ember dark:group-hover:text-moon-glow transition-colors">
