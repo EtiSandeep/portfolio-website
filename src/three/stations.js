@@ -5,7 +5,7 @@
 // frame when the copy sits above it rather than beside it.
 
 export const STATIONS = [
-    { id: "home", anchor: [0, 0, 0], camOffset: [0, 0.4, 9.5], pieceSide: 1 },
+    { id: "home", anchor: [0, 0, 0], camOffset: [0, 0.4, 10.2], pieceSide: 1, pieceLift: -0.35 },
     { id: "about", anchor: [6.5, -12, -10], camOffset: [0, 1.0, 9.0], pieceSide: -1 },
     { id: "experience", anchor: [-6.5, -25, -22], camOffset: [0, 1.2, 10.5], pieceSide: 1 },
     { id: "skills", anchor: [5.5, -38, -35], camOffset: [0, 0.5, 14.5], pieceSide: 0, pieceLift: 1.35 },

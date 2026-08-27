@@ -15,6 +15,7 @@ export default function SketchObject({
     thickness = 0.035,
     hatchScale = 1,
     accent = 0,
+    lightBias = 0,
     spin = 0.12,
     sway = 1,
     ...props
@@ -29,8 +30,9 @@ export default function SketchObject({
             ...inkUniforms(),
             uScale: { value: hatchScale },
             uAccentMix: { value: accent },
+            uLightBias: { value: lightBias },
         }),
-        [hatchScale, accent],
+        [hatchScale, accent, lightBias],
     );
 
     const outlineUniforms = useMemo(() => {

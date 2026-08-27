@@ -135,6 +135,7 @@ uniform vec3 uAccent;
 uniform float uScale;
 uniform float uAccentMix;
 uniform float uKeyLight;
+uniform float uLightBias;   // + for a pale surface, - for a dark one
 
 varying vec3 vNormalV;
 varying vec3 vViewDir;
@@ -149,6 +150,10 @@ void main() {
 
   // A flatter key leaves more of the form in hatching, which is how chalk behaves.
   float light = (1.0 - uKeyLight) + uKeyLight * max(dot(n, lightDir), 0.0);
+
+  // Not everything is made of the same stuff. A whiteboard has to come out white, or
+  // whatever is drawn on it is buried under the hatching of the board itself.
+  light = clamp(light + uLightBias, 0.0, 1.0);
 
   // Darken toward the silhouette, which is where a pen would crowd its strokes.
   float rim = pow(1.0 - max(dot(n, v), 0.0), 2.0);
