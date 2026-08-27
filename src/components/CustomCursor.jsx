@@ -4,9 +4,10 @@ import { useTheme } from "../context/ThemeContext";
 
 const IDLE_DELAY = 1200;
 
-const GLOW_GRADIENT = {
-    sun: "radial-gradient(circle, #FF6B6B 0%, #F7A94E 60%, transparent 80%)",
-    moon: "radial-gradient(circle, #8B7FD9 0%, #4B3B8C 60%, transparent 80%)",
+// The wet blot under the nib: ink soaking into paper, chalk dust settling on slate.
+const BLOT = {
+    sun: "radial-gradient(circle, #1B4F91 0%, #1F1D1A 62%, transparent 80%)",
+    moon: "radial-gradient(circle, #EDE7D8 0%, #8FC8E8 62%, transparent 80%)",
 };
 
 const CustomCursor = () => {
@@ -52,11 +53,11 @@ const CustomCursor = () => {
 
     return (
         <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden">
-            {/* Soft glow trail — multiply reads on the cream day bg, screen reads on the night bg */}
+            {/* Multiply reads as ink sinking into the stock; screen reads as chalk dust. */}
             <motion.div
                 className="absolute rounded-full blur-md"
                 style={{
-                    background: GLOW_GRADIENT[theme],
+                    background: BLOT[theme],
                     mixBlendMode: theme === "moon" ? "screen" : "multiply",
                     translateX: "-50%",
                     translateY: "-50%",
@@ -66,14 +67,14 @@ const CustomCursor = () => {
                     y: position.y,
                     width: linkHovered ? 56 : clicked ? 24 : 32,
                     height: linkHovered ? 56 : clicked ? 24 : 32,
-                    opacity: idle ? 0 : linkHovered ? 0.55 : 0.35,
+                    opacity: idle ? 0 : linkHovered ? 0.45 : 0.28,
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
             />
 
-            {/* Precise center dot */}
+            {/* The nib itself. */}
             <motion.div
-                className="absolute w-2 h-2 rounded-full bg-ink dark:bg-moon-ink"
+                className="absolute w-2 h-2 rounded-full bg-ink dark:bg-chalk"
                 style={{ translateX: "-50%", translateY: "-50%" }}
                 animate={{
                     x: position.x,

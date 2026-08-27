@@ -1,25 +1,27 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { Color, Vector2 } from "three";
+import { Vector2 } from "three";
 import { paperFragment, paperVertex } from "./glsl/paper";
-import { PALETTE } from "./palette";
+import { ink, syncInk } from "./palette";
 
-/** The sheet. Locked to the camera so it always fills the frame exactly. */
+/** The surface everything is drawn on. Locked to the camera so it always fills the frame. */
 export default function Paper() {
     const mesh = useRef();
+    const material = useRef();
     const { size, viewport } = useThree();
 
     const uniforms = useMemo(
         () => ({
-            uPaper: { value: new Color(PALETTE.paper) },
-            uPaperShade: { value: new Color(PALETTE.paperShade) },
-            uInk: { value: new Color(PALETTE.ink) },
+            uPaper: { value: ink.ground.clone() },
+            uPaperShade: { value: ink.groundShade.clone() },
+            uInk: { value: ink.stroke.clone() },
             uResolution: { value: new Vector2(size.width, size.height) },
         }),
         [size.width, size.height],
     );
 
     useFrame(({ camera }) => {
+        syncInk(material.current?.uniforms);
         if (!mesh.current) return;
         mesh.current.position.copy(camera.position);
         mesh.current.quaternion.copy(camera.quaternion);
@@ -33,6 +35,7 @@ export default function Paper() {
         <mesh ref={mesh} frustumCulled={false} renderOrder={-1}>
             <planeGeometry args={[width, width]} />
             <shaderMaterial
+                ref={material}
                 vertexShader={paperVertex}
                 fragmentShader={paperFragment}
                 uniforms={uniforms}

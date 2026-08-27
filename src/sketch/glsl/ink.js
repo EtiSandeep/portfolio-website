@@ -27,6 +27,15 @@ float valueNoise(vec2 p) {
 }
 
 /**
+ * The bare surface: stock colour with its fibre showing. Solids fill themselves with this
+ * too, so a drawing that has faded out is indistinguishable from the sheet behind it.
+ */
+vec3 paperTone(vec2 frag, vec3 paper, vec3 shade) {
+  float fibre = valueNoise(frag * 0.9) * 0.5 + valueNoise(frag * 0.11) * 0.5;
+  return mix(paper, shade, fibre * 0.30);
+}
+
+/**
  * One layer of hatching. Returns 1 on a stroke and 0 between strokes.
  * wobble bends the ruling so the strokes drift the way a hand would.
  */
@@ -57,6 +66,15 @@ float hatchTone(vec2 frag, float light, float scale) {
 
   return clamp(ink, 0.0, 1.0);
 }
+
+/**
+ * Distance falls off as the pen lifting: strokes thin out and the drawing dissolves back
+ * into the sheet. It stands in for aerial perspective, and it keeps the set pieces of other
+ * sections from crowding the one you are actually reading.
+ */
+float inkFade(float depth) {
+  return 1.0 - smoothstep(16.0, 26.0, depth);
+}
 `;
 
 /** Inverted-hull outline: the same mesh, pushed out along its normals and drawn inside-out. */
@@ -64,20 +82,32 @@ export const outlineVertex = /* glsl */ `
 uniform float uThickness;
 uniform float uTime;
 
+varying float vDepth;
+
 ${inkCommon}
 
 void main() {
   // Vary the swell along the silhouette so the contour breathes like a drawn line.
   float jitter = 0.78 + 0.44 * valueNoise(position.xy * 2.4 + uTime * 0.05);
   vec3 swollen = position + normal * uThickness * jitter;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(swollen, 1.0);
+  vec4 mv = modelViewMatrix * vec4(swollen, 1.0);
+  vDepth = -mv.z;
+  gl_Position = projectionMatrix * mv;
 }
 `;
 
 export const outlineFragment = /* glsl */ `
 uniform vec3 uInk;
+uniform vec3 uPaper;
+uniform vec3 uPaperShade;
+
+varying float vDepth;
+
+${inkCommon}
+
 void main() {
-  gl_FragColor = vec4(uInk, 1.0);
+  vec3 sheet = paperTone(gl_FragCoord.xy, uPaper, uPaperShade);
+  gl_FragColor = vec4(mix(sheet, uInk, inkFade(vDepth)), 1.0);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }
@@ -86,11 +116,13 @@ void main() {
 export const hatchVertex = /* glsl */ `
 varying vec3 vNormalV;
 varying vec3 vViewDir;
+varying float vDepth;
 
 void main() {
   vec4 mv = modelViewMatrix * vec4(position, 1.0);
   vNormalV = normalize(normalMatrix * normal);
   vViewDir = normalize(-mv.xyz);
+  vDepth = -mv.z;
   gl_Position = projectionMatrix * mv;
 }
 `;
@@ -98,12 +130,15 @@ void main() {
 export const hatchFragment = /* glsl */ `
 uniform vec3 uInk;
 uniform vec3 uPaper;
+uniform vec3 uPaperShade;
 uniform vec3 uAccent;
 uniform float uScale;
 uniform float uAccentMix;
+uniform float uKeyLight;
 
 varying vec3 vNormalV;
 varying vec3 vViewDir;
+varying float vDepth;
 
 ${inkCommon}
 
@@ -112,16 +147,19 @@ void main() {
   vec3 v = normalize(vViewDir);
   vec3 lightDir = normalize(vec3(0.55, 0.8, 0.65));
 
-  float light = 0.18 + 0.82 * max(dot(n, lightDir), 0.0);
+  // A flatter key leaves more of the form in hatching, which is how chalk behaves.
+  float light = (1.0 - uKeyLight) + uKeyLight * max(dot(n, lightDir), 0.0);
 
   // Darken toward the silhouette, which is where a pen would crowd its strokes.
   float rim = pow(1.0 - max(dot(n, v), 0.0), 2.0);
   light *= 1.0 - rim * 0.55;
 
-  float ink = hatchTone(gl_FragCoord.xy, light, uScale);
+  float ink = hatchTone(gl_FragCoord.xy, light, uScale) * inkFade(vDepth);
 
   vec3 stroke = mix(uInk, uAccent, uAccentMix);
-  gl_FragColor = vec4(mix(uPaper, stroke, ink), 1.0);
+  vec3 sheet = paperTone(gl_FragCoord.xy, uPaper, uPaperShade);
+
+  gl_FragColor = vec4(mix(sheet, stroke, ink), 1.0);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Color, PlaneGeometry, SRGBColorSpace, TextureLoader, Vector2 } from "three";
+import { SRGBColorSpace, TextureLoader, Vector2 } from "three";
 import { portraitFragment, portraitVertex } from "./glsl/portrait";
-import { PALETTE } from "./palette";
+import { inkUniforms, syncInk } from "./palette";
+import SketchObject from "./SketchObject";
+import InkLine from "./InkLine";
 
 const PHOTO = `${import.meta.env.BASE_URL}portrait.jpg`;
 
@@ -38,11 +40,9 @@ export default function Portrait({ height = 6.4, ...props }) {
 
     const uniforms = useMemo(
         () => ({
+            ...inkUniforms(),
             uPhoto: { value: null },
             uTexel: { value: new Vector2(1 / 1024, 1 / 1536) },
-            uInk: { value: new Color(PALETTE.ink) },
-            uPaper: { value: new Color(PALETTE.paper) },
-            uAccent: { value: new Color(PALETTE.accent) },
             uScale: { value: 0.85 },
             uEdgeGain: { value: 1.5 },
             uReveal: { value: 1 },
@@ -61,6 +61,7 @@ export default function Portrait({ height = 6.4, ...props }) {
     }, [texture]);
 
     useFrame((_, delta) => {
+        syncInk(material.current?.uniforms);
         if (!material.current || !texture) return;
         // Draw it on once, from the top down.
         reveal.current = Math.min(reveal.current + delta * 0.55, 1);
@@ -87,14 +88,41 @@ export default function Portrait({ height = 6.4, ...props }) {
     );
 }
 
-/** Shown until public/portrait.jpg exists: a drawn frame standing in for the figure. */
+/**
+ * Shown until public/portrait.jpg exists.
+ *
+ * Not an empty frame with a note in it — a page missing its photograph should still look
+ * like a finished page. A hatched geodesic with two rings drawn round it holds the same
+ * spot and the same weight, and gives way the moment the real photograph lands.
+ */
 function PortraitPlaceholder({ height, ...props }) {
-    const geometry = useMemo(() => new PlaneGeometry(height * 0.66, height), [height]);
+    const r = height * 0.2;
+    const inner = useMemo(() => ringPoints(r * 1.7), [r]);
 
     return (
-        <lineSegments {...props}>
-            <edgesGeometry args={[geometry]} />
-            <lineBasicMaterial color={PALETTE.ink} transparent opacity={0.45} />
-        </lineSegments>
+        <group {...props}>
+            <SketchObject scale={r} spin={0.07} hatchScale={0.8} thickness={0.014}>
+                <icosahedronGeometry args={[1, 1]} />
+            </SketchObject>
+
+            <group rotation={[0.42, 0, 0.22]}>
+                <InkLine
+                    points={inner}
+                    closed
+                    segments={110}
+                    jitter={0.08}
+                    seed={71}
+                    opacity={0.45}
+                />
+            </group>
+
+        </group>
     );
 }
+
+/** Eight points is enough for the curve to read as a circle once it is resampled. */
+const ringPoints = (radius) =>
+    Array.from({ length: 8 }, (_, i) => {
+        const a = (i / 8) * Math.PI * 2;
+        return [Math.cos(a) * radius, Math.sin(a) * radius, 0];
+    });

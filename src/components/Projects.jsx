@@ -9,14 +9,15 @@ const ProjectRow = ({ project, index }) => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.55, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-        className="glass-card p-5 hover:-translate-y-1 transition-transform group"
+        className="card p-5 group"
     >
         <div className="flex items-start justify-between gap-4 mb-3">
             <div className="flex items-start gap-3">
-                <span className="mt-0.5 shrink-0 font-display text-xs font-bold text-white w-7 h-7 rounded-lg flex items-center justify-center bg-gradient-to-br from-ember to-rust dark:from-moon-indigo dark:to-moon-violet-deep shadow-md shadow-coral/30 dark:shadow-moon-indigo/40">
+                {/* The number, written in the corner the way you number a sketch. */}
+                <span className="mt-0.5 shrink-0 font-hand text-lg font-bold text-accent dark:text-chalk-accent">
                     {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="font-display text-lg font-bold text-ink dark:text-moon-ink group-hover:text-ember dark:group-hover:text-moon-glow transition-colors">
+                <h3 className="font-hand text-xl font-bold text-ink dark:text-chalk">
                     {project.title}
                 </h3>
             </div>
@@ -28,7 +29,7 @@ const ProjectRow = ({ project, index }) => (
                         target="_blank"
                         rel="noopener noreferrer"
                         title="View code"
-                        className="text-ink-soft dark:text-moon-ink-soft hover:text-ember dark:hover:text-moon-glow transition-colors"
+                        className="text-ink-soft dark:text-chalk-soft hover:text-accent dark:hover:text-chalk-accent transition-colors"
                     >
                         <Github size={18} />
                     </a>
@@ -39,29 +40,26 @@ const ProjectRow = ({ project, index }) => (
                         target="_blank"
                         rel="noopener noreferrer"
                         title="Live demo"
-                        className="text-ink-soft dark:text-moon-ink-soft hover:text-ember dark:hover:text-moon-glow transition-colors"
+                        className="text-ink-soft dark:text-chalk-soft hover:text-accent dark:hover:text-chalk-accent transition-colors"
                     >
                         <ExternalLink size={18} />
                     </a>
                 )}
                 {!project.github && !project.demo && (
-                    <span title="Private project" className="text-ink-soft/60 dark:text-moon-ink-soft/60">
+                    <span title="Private project" className="text-ink-soft/70 dark:text-chalk-soft/70">
                         <Lock size={15} />
                     </span>
                 )}
             </div>
         </div>
 
-        <p className="text-[13px] text-ink-soft dark:text-moon-ink-soft leading-relaxed mb-3.5">
+        <p className="text-[13.5px] text-ink-soft dark:text-chalk-soft leading-relaxed mb-4">
             {project.description}
         </p>
 
         <ul className="flex flex-wrap gap-2">
             {project.technologies.map((tech) => (
-                <li
-                    key={tech}
-                    className="text-[11px] font-semibold px-2.5 py-1 rounded-full text-ink-soft dark:text-moon-ink-soft border border-ink/10 dark:border-white/10 bg-white/40 dark:bg-white/5"
-                >
+                <li key={tech} className="ink-chip">
                     {tech}
                 </li>
             ))}
@@ -71,17 +69,17 @@ const ProjectRow = ({ project, index }) => (
 
 const Projects = () => (
     <Section id="projects" align="left">
-        <div className="mb-6">
-            <span className="section-eyebrow mb-4">04 — Work</span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-ink dark:text-moon-ink">
-                Selected <span className="gradient-text">Works</span>
+        <div className="mb-7">
+            <span className="margin-note mb-4">04 — pinned up</span>
+            <h2 className="font-hand text-3xl sm:text-4xl font-bold text-ink dark:text-chalk">
+                Selected <span className="underscored">works</span>.
             </h2>
-            <p className="mt-2.5 text-ink-soft dark:text-moon-ink-soft">
-                Innovation through architecture and code.
+            <p className="mt-3 text-ink-soft dark:text-chalk-soft">
+                Four boards on the wall. These are the ones still up.
             </p>
         </div>
 
-        <div className="space-y-3.5">
+        <div className="space-y-4">
             {profile.projects.map((project, i) => (
                 <ProjectRow key={project.title} project={project} index={i} />
             ))}

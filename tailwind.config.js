@@ -1,3 +1,9 @@
+import { INK_THEMES } from "./src/sketch/inkColors.js";
+
+// Tokens come straight from the palette the shaders read, so the copy and the drawing
+// behind it can never disagree about what colour the paper is.
+const { paper, slate } = INK_THEMES;
+
 /** @type {import('tailwindcss').Config} */
 export default {
     darkMode: 'class',
@@ -8,57 +14,49 @@ export default {
     theme: {
         extend: {
             colors: {
-                cream: "#FFF8F0",
-                paper: "#FFF1E1",
-                ink: "#2B1B12",
-                "ink-soft": "#574236",
-                coral: "#FF6B6B",
-                // Text-safe counterparts of coral/tangerine/rose. The bright originals are
-                // for glows, rails and the 3D world; anything carrying text, or sitting
-                // under white text, uses these so the day theme clears WCAG AA.
-                ember: "#A8322A",
-                rust: "#8F4712",
-                wine: "#733350",
-                tangerine: "#F7A94E",
-                gold: "#FFD97D",
-                rose: "#FF8FA3",
-                plum: "#6B3A4E",
-                // Moonlight (night theme) palette
-                night: "#140C24",
-                "night-paper": "#1F1638",
-                "moon-ink": "#F3ECFB",
-                "moon-ink-soft": "#C6BAE3",
-                "moon-indigo": "#4B3B8C",
-                "moon-violet": "#8B7FD9",
-                "moon-violet-deep": "#6357B8",
-                "moon-glow": "#F0D9A0",
-                "moon-plum": "#6B4E85",
+                // Ink on cartridge paper.
+                paper: paper.ground,
+                "paper-shade": paper.groundShade,
+                ink: paper.stroke,
+                "ink-soft": paper.strokeSoft,
+                accent: paper.accent,
+                "accent-warm": paper.accentWarm,
+
+                // Chalk on slate.
+                board: slate.ground,
+                "board-shade": slate.groundShade,
+                chalk: slate.stroke,
+                "chalk-soft": slate.strokeSoft,
+                "chalk-accent": slate.accent,
+                "chalk-warm": slate.accentWarm,
             },
             fontFamily: {
-                display: ['"Outfit"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
-                sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                // Kalam for anything that should look written; a plain humanist sans for
+                // anything that has to be read at length.
+                hand: ['"Kalam"', '"Segoe Print"', '"Bradley Hand"', '"Comic Sans MS"', 'ui-rounded', 'system-ui', 'sans-serif'],
+                sans: ['"Nunito Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                display: ['"Kalam"', '"Segoe Print"', '"Bradley Hand"', '"Comic Sans MS"', 'ui-rounded', 'system-ui', 'sans-serif'],
+            },
+            borderRadius: {
+                // Corners a hand would round: never the same twice around the shape.
+                scrawl: '255px 14px 235px 16px / 16px 230px 14px 255px',
+                'scrawl-alt': '18px 240px 16px 250px / 235px 16px 245px 14px',
             },
             animation: {
-                'spin-slow': 'spin 14s linear infinite',
-                'blob-drift': 'blob-drift 18s ease-in-out infinite',
-                'blob-drift-slow': 'blob-drift 26s ease-in-out infinite',
                 'float': 'float 6s ease-in-out infinite',
                 'float-delayed': 'float 7s ease-in-out 1.5s infinite',
-                'twinkle': 'twinkle 3s ease-in-out infinite',
+                'jitter': 'jitter 0.42s steps(2, end) infinite',
             },
             keyframes: {
-                'blob-drift': {
-                    '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
-                    '33%': { transform: 'translate(4%, 6%) scale(1.08)' },
-                    '66%': { transform: 'translate(-3%, -4%) scale(0.95)' },
-                },
                 'float': {
                     '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-16px)' },
+                    '50%': { transform: 'translateY(-14px)' },
                 },
-                'twinkle': {
-                    '0%, 100%': { opacity: 0.2 },
-                    '50%': { opacity: 1 },
+                // The shimmer of a line redrawn each frame.
+                'jitter': {
+                    '0%': { transform: 'translate(0, 0) rotate(0deg)' },
+                    '50%': { transform: 'translate(0.4px, -0.3px) rotate(0.12deg)' },
+                    '100%': { transform: 'translate(-0.3px, 0.35px) rotate(-0.1deg)' },
                 },
             },
         },

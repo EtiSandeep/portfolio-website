@@ -22,41 +22,35 @@ const Hero = () => {
         <section id="home" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-24 pb-28">
             <div className="w-full max-w-6xl mx-auto">
                 <div className="copy-scrim w-full lg:mr-auto lg:max-w-[52%]">
-                    <motion.div {...rise(0)} className="section-eyebrow mb-7">
+                    <motion.p {...rise(0)} className="margin-note mb-6">
                         {isSun
-                            ? <Sun size={13} className="text-rust dark:text-moon-glow" />
-                            : <Moon size={13} className="text-moon-glow" />}
+                            ? <Sun size={15} className="text-accent-warm dark:text-chalk-warm" />
+                            : <Moon size={15} className="text-chalk-warm" />}
                         Hey, I&apos;m Sandeep
-                    </motion.div>
+                    </motion.p>
 
                     <motion.h1
                         {...rise(0.08)}
-                        className="font-display text-[2.05rem] leading-[1.06] sm:text-5xl lg:text-7xl font-bold tracking-tight mb-5 sm:mb-7 text-ink dark:text-moon-ink"
+                        className="font-hand text-[1.8rem] leading-[1.3] sm:text-5xl lg:text-6xl font-bold tracking-tight mb-7 sm:mb-9 text-ink dark:text-chalk"
                     >
                         I build{" "}
-                        <span className="gradient-text">AI‑powered systems</span>{" "}
+                        <span className="ringed whitespace-nowrap">AI‑powered systems</span>{" "}
                         that feel effortless.
                     </motion.h1>
 
                     <motion.p
                         {...rise(0.18)}
-                        className="text-[15px] sm:text-lg lg:text-xl text-ink/80 dark:text-moon-ink-soft max-w-xl mb-7 sm:mb-9 leading-relaxed"
+                        className="text-[15px] sm:text-lg text-ink-soft dark:text-chalk-soft max-w-xl mb-7 sm:mb-9 leading-relaxed"
                     >
                         Principal Engineer and Solution Architect, building enterprise .NET
                         platforms, cloud infrastructure and the AI systems layered on top.
                     </motion.p>
 
-                    <motion.div {...rise(0.28)} className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-8 sm:mb-12">
-                        <a
-                            href="#projects"
-                            className="w-full sm:w-auto justify-center px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-ember to-rust hover:from-rust hover:to-ember dark:from-moon-indigo dark:to-moon-violet-deep dark:hover:from-moon-violet-deep dark:hover:to-moon-indigo text-white font-semibold rounded-full flex items-center gap-2 transition-all shadow-lg shadow-coral/30 dark:shadow-moon-indigo/40 hover:shadow-xl hover:shadow-coral/40 hover:-translate-y-0.5"
-                        >
+                    <motion.div {...rise(0.28)} className="flex flex-col sm:flex-row sm:flex-wrap gap-4 mb-9 sm:mb-12">
+                        <a href="#projects" className="ink-btn ink-btn--filled w-full sm:w-auto">
                             See my work <ArrowRight size={18} />
                         </a>
-                        <a
-                            href="#contact"
-                            className="w-full sm:w-auto text-center px-6 sm:px-7 py-3.5 sm:py-4 text-sm sm:text-base glass-card rounded-full text-ink dark:text-moon-ink font-semibold hover:-translate-y-0.5 transition-transform"
-                        >
+                        <a href="#contact" className="ink-btn w-full sm:w-auto">
                             Say hello
                         </a>
                     </motion.div>
@@ -65,10 +59,10 @@ const Hero = () => {
                         {marks.map((mark) => (
                             <div key={mark.label}>
                                 <dt className="sr-only">{mark.label}</dt>
-                                <dd className="font-display text-2xl sm:text-3xl font-bold text-ink dark:text-moon-ink leading-none">
+                                <dd className="font-hand text-3xl sm:text-4xl font-bold text-ink dark:text-chalk leading-none">
                                     {mark.value}
                                 </dd>
-                                <p className="mt-1.5 text-[10px] sm:text-xs uppercase tracking-[0.06em] sm:tracking-[0.15em] text-ink/85 dark:text-moon-ink-soft">
+                                <p className="mt-2 text-[11px] sm:text-xs text-ink-soft dark:text-chalk-soft">
                                     {mark.label}
                                 </p>
                             </div>
@@ -81,14 +75,15 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.2, duration: 0.8 }}
-                className="absolute bottom-10 right-5 sm:right-9 hidden sm:flex flex-col items-center gap-3 text-ink-soft dark:text-moon-ink-soft pointer-events-none"
+                className="absolute bottom-10 right-5 sm:right-9 hidden sm:flex flex-col items-center gap-3 text-ink-soft dark:text-chalk-soft pointer-events-none"
             >
                 <MousePointer2 size={14} className="rotate-180" />
-                <span className="text-[10px] uppercase tracking-[0.28em] [writing-mode:vertical-rl]">
-                    Scroll to travel
+                <span className="font-hand text-sm [writing-mode:vertical-rl]">
+                    scroll — it keeps drawing
                 </span>
                 <motion.span
-                    className="w-px h-12 bg-gradient-to-b from-coral to-transparent dark:from-moon-violet"
+                    aria-hidden="true"
+                    className="w-px h-12 bg-ink/50 dark:bg-chalk/45"
                     animate={{ scaleY: [0.3, 1, 0.3], opacity: [0.3, 1, 0.3] }}
                     transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                     style={{ originY: 0 }}

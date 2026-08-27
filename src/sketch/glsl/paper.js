@@ -22,11 +22,8 @@ ${inkCommon}
 void main() {
   vec2 frag = gl_FragCoord.xy;
 
-  vec3 col = uPaper;
-
   // Fibre: fine speckle plus a slower blotch, so it does not read as uniform noise.
-  float fibre = valueNoise(frag * 0.9) * 0.5 + valueNoise(frag * 0.11) * 0.5;
-  col = mix(col, uPaperShade, fibre * 0.30);
+  vec3 col = paperTone(frag, uPaper, uPaperShade);
 
   // Faint ruling, the way a notebook page carries a grid you barely register.
   vec2 grid = abs(fract(frag / 46.0) - 0.5);

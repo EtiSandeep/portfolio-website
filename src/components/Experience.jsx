@@ -1,23 +1,21 @@
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
 import Section from "./Section";
 import { profile } from "../data/profile";
 
 const Experience = () => (
     <Section id="experience" align="left">
-        <div className="glass-panel p-7 sm:p-9">
-            <span className="section-eyebrow mb-5">02 — Journey</span>
+        <div className="sheet p-7 sm:p-9">
+            <span className="margin-note mb-5">02 — the climb</span>
 
-            <h2 className="font-display text-3xl sm:text-4xl font-bold mb-6 text-ink dark:text-moon-ink flex items-center gap-3">
-                <Briefcase className="text-ember dark:text-moon-glow" size={28} />
-                Professional Journey
+            <h2 className="font-hand text-3xl sm:text-4xl font-bold mb-7 text-ink dark:text-chalk">
+                Seven years, <span className="underscored">six rungs</span>.
             </h2>
 
             <ol className="relative pl-7">
-                {/* The rail mirrors the lit spiral turning alongside this panel. */}
+                {/* The rail mirrors the drawn spine threading the plates beside this sheet. */}
                 <span
                     aria-hidden="true"
-                    className="absolute left-[5px] top-2 bottom-2 w-px bg-gradient-to-b from-coral via-tangerine to-transparent dark:from-moon-violet dark:via-moon-glow"
+                    className="absolute left-[5px] top-2 bottom-2 w-px bg-ink/35 dark:bg-chalk/30"
                 />
 
                 {profile.experience.map((exp, i) => (
@@ -27,21 +25,23 @@ const Experience = () => (
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-10%" }}
                         transition={{ duration: 0.5, delay: i * 0.06 }}
-                        className="relative pb-5 last:pb-0"
+                        className="relative pb-6 last:pb-0"
                     >
+                        {/* A circle drawn round the point, not a filled dot. */}
                         <span
                             aria-hidden="true"
-                            className="absolute -left-7 top-2 w-[11px] h-[11px] rounded-full bg-gradient-to-br from-coral to-gold dark:from-moon-violet dark:to-moon-glow ring-4 ring-cream/70 dark:ring-night/70"
+                            className="absolute -left-[26px] top-[7px] w-[13px] h-[13px] rounded-full border-2 border-ink dark:border-chalk bg-paper dark:bg-board"
+                            style={{ borderRadius: "52% 48% 45% 55% / 55% 52% 48% 45%" }}
                         />
-                        <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
-                            <h3 className="font-display text-base font-bold text-ink dark:text-moon-ink">
+                        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+                            <h3 className="font-hand text-xl font-bold text-ink dark:text-chalk">
                                 {exp.role}
                             </h3>
-                            <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ember dark:text-moon-glow">
+                            <span className="font-hand text-sm text-accent dark:text-chalk-accent">
                                 {exp.period}
                             </span>
                         </div>
-                        <p className="mt-1 text-[13px] text-ink-soft dark:text-moon-ink-soft leading-relaxed">
+                        <p className="mt-1.5 text-[13.5px] text-ink-soft dark:text-chalk-soft leading-relaxed">
                             {exp.description}
                         </p>
                     </motion.li>
