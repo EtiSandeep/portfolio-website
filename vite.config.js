@@ -7,6 +7,11 @@ export default defineConfig({
   base: "/",
   build: {
     rollupOptions: {
+      // A second entry, so the sketch look test can be reviewed without touching the site.
+      input: {
+        main: "index.html",
+        sketch: "sketch.html",
+      },
       output: {
         // Vendor code changes far less often than the site does. Splitting it out means a
         // redeploy only invalidates the small app chunk for returning visitors.
