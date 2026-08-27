@@ -63,7 +63,10 @@ export default function Rig({ motion = 1 }) {
         targetLook.current.x += lateral;
 
         // Raising both camera and target drops the set piece down the frame. Portrait
-        // viewports get an extra push so the piece clears the copy panel above it.
+        // viewports get a small push — enough to shift the drawing out from directly behind
+        // the heading, but not enough to shove it off the bottom. On a phone the copy panel
+        // takes most of the screen and the drawing sits behind it, the way notes get written
+        // over a sketch that was already on the page.
         const portraitLift = aspect < 1 ? 1.2 : 0;
         const lift = MathUtils.lerp(LIFTS[i], LIFTS[i + 1], f) + portraitLift;
         targetCam.current.y += lift;

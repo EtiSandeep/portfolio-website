@@ -1,12 +1,71 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
-import { SRGBColorSpace, TextureLoader, Vector2 } from "three";
+import {
+    ClampToEdgeWrapping,
+    DataTexture,
+    LinearFilter,
+    RedFormat,
+    SRGBColorSpace,
+    TextureLoader,
+    UnsignedByteType,
+    Vector2,
+} from "three";
 import { portraitFragment, portraitVertex } from "./glsl/portrait";
 import { inkUniforms, syncInk } from "./palette";
+import { MASK_SIZE, buildSubjectMask } from "./cutout";
 import SketchObject from "./SketchObject";
 import InkLine from "./InkLine";
 
 const PHOTO = `${import.meta.env.BASE_URL}portrait.jpg`;
+
+/** A mask that keeps everything, for before one is built and for photos that defeat the cut. */
+const keepAll = () => {
+    const texture = new DataTexture(new Uint8Array([255]), 1, 1, RedFormat, UnsignedByteType);
+    texture.needsUpdate = true;
+    return texture;
+};
+
+/**
+ * Cuts the figure out of the photograph, once, on the CPU.
+ *
+ * Runs at a fraction of the photo's resolution: the mask only has to be accurate to about
+ * the width of a pen stroke, and a flood fill over four megapixels would be felt.
+ */
+const cutOut = (image) => {
+    try {
+        const scale = MASK_SIZE / Math.max(image.width, image.height);
+        const w = Math.max(Math.round(image.width * scale), 1);
+        const h = Math.max(Math.round(image.height * scale), 1);
+
+        const canvas = document.createElement("canvas");
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        if (!ctx) return null;
+        ctx.drawImage(image, 0, 0, w, h);
+
+        const mask = buildSubjectMask(ctx.getImageData(0, 0, w, h).data, w, h);
+        if (!mask) return null;
+
+        // A loaded image texture is flipped on upload and a DataTexture is not, so the mask
+        // has to be handed over already the right way up or it cuts the figure upside down.
+        const flipped = new Uint8Array(mask.length);
+        for (let y = 0; y < h; y++) {
+            flipped.set(mask.subarray((h - 1 - y) * w, (h - y) * w), y * w);
+        }
+
+        const texture = new DataTexture(flipped, w, h, RedFormat, UnsignedByteType);
+        texture.magFilter = LinearFilter;
+        texture.minFilter = LinearFilter;
+        texture.wrapS = ClampToEdgeWrapping;
+        texture.wrapT = ClampToEdgeWrapping;
+        texture.needsUpdate = true;
+        return texture;
+    } catch {
+        // A tainted or unreadable canvas is not worth taking the portrait down for.
+        return null;
+    }
+};
 
 /**
  * The photograph, drawn.
@@ -42,9 +101,11 @@ export default function Portrait({ height = 6.4, ...props }) {
         () => ({
             ...inkUniforms(),
             uPhoto: { value: null },
+            uMask: { value: keepAll() },
+            uHasMask: { value: 0 },
             uTexel: { value: new Vector2(1 / 1024, 1 / 1536) },
-            uScale: { value: 0.85 },
-            uEdgeGain: { value: 1.5 },
+            uScale: { value: 1.0 },
+            uEdgeGain: { value: 2.4 },
             uReveal: { value: 1 },
         }),
         [],
@@ -52,11 +113,18 @@ export default function Portrait({ height = 6.4, ...props }) {
 
     useEffect(() => {
         if (!texture || !material.current) return;
-        material.current.uniforms.uPhoto.value = texture;
-        material.current.uniforms.uTexel.value.set(
-            1 / texture.image.width,
-            1 / texture.image.height,
-        );
+        const { uniforms } = material.current;
+
+        uniforms.uPhoto.value = texture;
+        uniforms.uTexel.value.set(1 / texture.image.width, 1 / texture.image.height);
+
+        const mask = cutOut(texture.image);
+        if (mask) {
+            uniforms.uMask.value.dispose();
+            uniforms.uMask.value = mask;
+            uniforms.uHasMask.value = 1;
+        }
+
         reveal.current = 0;
     }, [texture]);
 

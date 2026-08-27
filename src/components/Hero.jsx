@@ -22,7 +22,7 @@ const Hero = () => {
         <section id="home" className="relative min-h-screen flex items-center px-5 sm:px-8 pt-24 pb-28">
             <div className="w-full max-w-6xl mx-auto">
                 <div className="copy-scrim w-full lg:mr-auto lg:max-w-[52%]">
-                    <motion.p {...rise(0)} className="margin-note mb-6">
+                    <motion.p {...rise(0)} className="margin-note mb-4 sm:mb-6">
                         {isSun
                             ? <Sun size={15} className="text-accent-warm dark:text-chalk-warm" />
                             : <Moon size={15} className="text-chalk-warm" />}
@@ -31,7 +31,7 @@ const Hero = () => {
 
                     <motion.h1
                         {...rise(0.08)}
-                        className="font-hand text-[1.8rem] leading-[1.3] sm:text-5xl lg:text-6xl font-bold tracking-tight mb-7 sm:mb-9 text-ink dark:text-chalk"
+                        className="font-hand text-[1.8rem] leading-[1.25] sm:text-5xl lg:text-6xl font-bold tracking-tight mb-5 sm:mb-9 text-ink dark:text-chalk"
                     >
                         I build{" "}
                         <span className="ringed whitespace-nowrap">AI‑powered systems</span>{" "}
@@ -40,13 +40,13 @@ const Hero = () => {
 
                     <motion.p
                         {...rise(0.18)}
-                        className="text-[15px] sm:text-lg text-ink-soft dark:text-chalk-soft max-w-xl mb-7 sm:mb-9 leading-relaxed"
+                        className="text-[15px] sm:text-lg text-ink-soft dark:text-chalk-soft max-w-xl mb-6 sm:mb-9 leading-relaxed"
                     >
                         Principal Engineer and Solution Architect, building enterprise .NET
                         platforms, cloud infrastructure and the AI systems layered on top.
                     </motion.p>
 
-                    <motion.div {...rise(0.28)} className="flex flex-col sm:flex-row sm:flex-wrap gap-4 mb-9 sm:mb-12">
+                    <motion.div {...rise(0.28)} className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-12">
                         <a href="#projects" className="ink-btn ink-btn--filled w-full sm:w-auto">
                             See my work <ArrowRight size={18} />
                         </a>
