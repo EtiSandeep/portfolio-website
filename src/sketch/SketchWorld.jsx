@@ -1,7 +1,7 @@
 import InkDriver from "./InkDriver";
 import Paper from "./Paper";
 import Rig from "../three/Rig";
-import Stack from "./pieces/Stack";
+import Agents from "./pieces/Agents";
 import Whiteboard from "./pieces/Whiteboard";
 import Ladder from "./pieces/Ladder";
 import MindMap from "./pieces/MindMap";
@@ -21,7 +21,7 @@ export default function SketchWorld({ theme, quality }) {
             <Rig motion={motion} />
             <Paper />
 
-            <Stack motion={motion} />
+            <Agents motion={motion} />
             <Whiteboard motion={motion} />
             <Ladder motion={motion} />
             <MindMap motion={motion} showLabels={tier !== "low"} />
