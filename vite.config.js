@@ -7,6 +7,12 @@ export default defineConfig({
   base: "/",
   build: {
     rollupOptions: {
+      // A second entry, so the title-sequence look test can be judged without touching the
+      // site that is live.
+      input: {
+        main: "index.html",
+        cinema: "cinema.html",
+      },
       output: {
         // Vendor code changes far less often than the site does. Splitting it out means a
         // redeploy only invalidates the small app chunk for returning visitors.
